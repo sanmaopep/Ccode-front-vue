@@ -25,10 +25,10 @@ class Mission{
      */
     static addMission(data){
         return new Promise((resolve,reject)=>{
-
+            resolve();
         });
     }
-
+    
     /**
      * 获取任务列表
      * POST PARAMS:(如果为''则代表可选)
@@ -183,3 +183,5 @@ class Mission{
         });
     }
 }
+
+export default Mission

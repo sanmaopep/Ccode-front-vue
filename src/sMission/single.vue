@@ -1,7 +1,7 @@
 <template>
 	<div>
     	<myheader page="2"></myheader>
-    	<mycontent></mycontent>
+    	<mycontent :mID="$route.params.id"></mycontent>
     	<myjoin></myjoin>
     	<mycomment></mycomment>
   	</div>
@@ -13,16 +13,9 @@
 	import myjoin from './compenents/mJoinPerson.vue'
 	import mycomment from './compenents/mComment.vue'
 
-	let data = {
-		id:0
-	}
-
 	export default {
 	  data(){
 	    return data;
-	  },
-	  mounted(){
-	  	data.id = this.$route.params.id;
 	  },
 	  components: {
 	    myheader,

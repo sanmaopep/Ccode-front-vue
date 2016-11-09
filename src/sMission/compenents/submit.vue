@@ -17,7 +17,7 @@
 				<monthrow label="结束日期" v-model="formData.endDate"></monthrow>
 				<moneyrow label="悬赏" v-model="formData.money"></moneyrow>
 				<editorrow label="任务说明" v-model="formData.description"></editorrow>
-				<agreerow v-model="formData.agree"></agreerow>
+				<agreerow v-model="agree"></agreerow>
       			<div class="inline field">
 					<label class="w100"></label>
 					<button class="ui button" type="submit" style="width: 135px;" @click="submitForm">提交</button>
@@ -33,6 +33,7 @@
 	import monthrow from '../../compenents/monthRow.vue'
 	import editorrow from '../../compenents/editorRow.vue'
 	import agreerow from '../../compenents/agreeRow.vue'
+	import mission from '../../services/mission.js'
 
 	let classList = [
 		'移动开发',
@@ -49,8 +50,9 @@
 			endDate: '',
 			money: 0,
 			description: '',
-			agree: false
+			
 		},
+		agree: false,
 		eMsg:{
 			missionName: false
 		},
@@ -61,11 +63,15 @@
 	function checkForm(){
 		if(data.formData.missionName === ''){
 			data.eMsg.missionName = "任务名不得为空" ;
+			return false;
 		}else if(data.formData.missionName.length > 20){
 			data.eMsg.missionName = "任务名不得大于20个字符" ;
+			return false;
 		}else{
 			data.eMsg.missionName = false ;
+			return false;
 		}
+		return true;
 	}
 
 	export default {
@@ -81,7 +87,14 @@
 		},
 		methods: {
 			submitForm() {
-				checkForm();
+				if( checkForm() && data.agree){
+					//TODO 添加任务逻辑
+					mission.addMission().then(()=>{
+						//添加成功
+					},(msg)=>{
+						alert(msg);
+					});
+				}
 			}
 		}
 	}
