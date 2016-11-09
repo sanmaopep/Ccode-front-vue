@@ -1,0 +1,88 @@
+<template>
+	<section class="ui container mt20">
+		<div class="ui segment">
+			<h1 class="ui header normal-fw"><span class="titleSquare"></span>发布任务</h1>
+			<div class="ui divider"></div>
+			<div class="ui form" style="padding-left: 50px;" id="submitMissionForm">
+				<inputrow label="任务名称" v-model="formData.missionName" :eMsg="eMsg.missionName"></inputrow>
+				<div class="inline field">
+					<label class="normal-fw fz16 w100">任务分类</label>
+					<select class="ui fluid dropdown w500" v-model="formData.className">
+						<option v-for="option in classList" :value="option">
+							{{ option }}
+						</option>
+					</select>
+				</div>
+				<monthrow label="开始日期" v-model="formData.startDate"></monthrow>
+				<monthrow label="结束日期" v-model="formData.endDate"></monthrow>
+				<moneyrow label="悬赏" v-model="formData.money"></moneyrow>
+				<editorrow label="任务说明" v-model="formData.description"></editorrow>
+				<agreerow v-model="formData.agree"></agreerow>
+      			<div class="inline field">
+					<label class="w100"></label>
+					<button class="ui button" type="submit" style="width: 135px;" @click="submitForm">提交</button>
+      			</div>
+			</div>
+		</div>
+	</section>
+</template>
+
+<script>
+	import inputrow from '../../compenents/inputRow.vue'
+	import moneyrow from '../../compenents/moneyRow.vue'
+	import monthrow from '../../compenents/monthRow.vue'
+	import editorrow from '../../compenents/editorRow.vue'
+	import agreerow from '../../compenents/agreeRow.vue'
+
+	let classList = [
+		'移动开发',
+		'前端开发',
+		'后端开发',
+		'其它'
+	]
+
+	let data = {
+		formData:{
+			missionName: '',
+			className: classList[0],
+			startDate: '',
+			endDate: '',
+			money: 0,
+			description: '',
+			agree: false
+		},
+		eMsg:{
+			missionName: false
+		},
+		classList: classList
+	};
+
+	/* 检查表单 */
+	function checkForm(){
+		if(data.formData.missionName === ''){
+			data.eMsg.missionName = "任务名不得为空" ;
+		}else if(data.formData.missionName.length > 20){
+			data.eMsg.missionName = "任务名不得大于20个字符" ;
+		}else{
+			data.eMsg.missionName = false ;
+		}
+	}
+
+	export default {
+		data() {
+			return data;
+		},
+		components:{
+			inputrow ,
+			moneyrow ,
+			monthrow ,
+			editorrow ,
+			agreerow
+		},
+		methods: {
+			submitForm() {
+				checkForm();
+			}
+		}
+	}
+</script>

@@ -1,0 +1,248 @@
+#slider {
+  padding: 0px;
+  height: 481px;
+  position: relative;
+}
+#slider .slider-img {
+  display: block;
+  height: 481px;
+  width: 100%;
+  position: absolute;
+  background: center top no-repeat;
+  opacity: 0;
+  transition: all .5s linear;
+}
+#slider .slider-img-show {
+  opacity: 100;
+  display: block;
+}
+#slider #turnLeft {
+  position: absolute;
+  left: 0px;
+  top: 45%;
+  cursor: pointer;
+}
+#slider #turnRight {
+  position: absolute;
+  right: 0px;
+  top: 45%;
+  cursor: pointer;
+}
+#slider .turn-icon {
+  font-size: 20px;
+  width: 30px;
+  height: 75px;
+  line-height: 75px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+#story {
+  padding-top: 35px;
+}
+#story a {
+  display: block;
+}
+#story a:hover {
+  transform: scale(1.1);
+}
+#story .column {
+  text-align: center;
+}
+a.my.card {
+  margin-bottom: 20px;
+  display: block;
+  position: relative;
+  transition: all .2s linear;
+  height: 162px;
+  padding: 24px 0px 30px 30px;
+  cursor: pointer;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.32);
+  border-radius: 5px;
+}
+a.my.card .header {
+  font-size: 20px;
+  line-height: 20px;
+  color: #1b1c1d;
+  margin: 0 0 10px;
+}
+a.my.card .publish-time,
+a.my.card .meta-detail {
+  font-size: 12px;
+  line-height: 12px;
+  margin: 0;
+  color: #999;
+}
+a.my.card .detail {
+  margin-top: 24px;
+}
+a.my.card .single-detail {
+  width: 125px;
+  display: inline-block;
+  margin-right: 40px;
+}
+a.my.card .single-detail .sub-text {
+  font-size: 12px;
+  line-height: 1;
+  margin: 0;
+  color: #999;
+}
+a.my.card .single-detail .main-text {
+  font-size: 16px;
+  line-height: 1;
+  margin: 3px 0 0;
+  color: #1b1c1d;
+}
+a.my.card .right-section {
+  width: 240px;
+  height: 110px;
+  top: 25px;
+  position: absolute;
+  text-align: center;
+  right: 0px;
+  background: #1ABD9B;
+  padding: 0px 25px;
+  color: #fff;
+}
+a.my.card .right-section .money-budget {
+  text-align: center;
+  color: #fff;
+  font-size: 35px;
+  display: inline-block;
+}
+a.my.card .right-section .money-budget .money-number {
+  color: #fff;
+  font-weight: bold;
+}
+a.my.card .right-section .money-budget .budget-RMB {
+  font-size: 14px;
+}
+a.my.card:hover {
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+}
+#mysearch input[type="text"] {
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+}
+#mysearch button.ui.button {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-left: 0px;
+  font-size: 12px;
+  background: #FFF;
+}
+#mysearch input[type="text"]:focus {
+  border-color: rgba(34, 36, 38, 0.15);
+}
+#selectArea .ui.secondary.menu {
+  margin: 0 0;
+}
+.missionExtraContent {
+  margin-top: 50px;
+}
+.time-select {
+  width: 130px!important;
+}
+.icon.username {
+  background: url(../img/username.png) no-repeat;
+  background-position: 50% 50%;
+}
+.icon.password {
+  background: url(../img/password.png) no-repeat;
+  background-position: 50% 50%;
+}
+.icon.admited {
+  background: url(../img/crown.png) no-repeat;
+  z-index: 999;
+  background-size: 50px 50px;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+}
+* {
+  font-family: "Microsoft YaHei";
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.header {
+  font-family: 'Helvetica', 'Tahoma', 'Arial', 'Microsoft YaHei', '微软雅黑', 'SimSun', '宋体', ' sans-serif' !important;
+  font-weight: normal;
+}
+body {
+  min-width: 1000px;
+}
+.clearfix {
+  clear: both;
+  overflow: hidden;
+}
+.fluid-image {
+  display: block;
+  width: 100%;
+  height: 183px;
+}
+#header .active {
+  color: #34495E;
+  border-color: #34495E;
+}
+#header .image {
+  margin-bottom: 0;
+}
+#header .item {
+  padding: 14px 18px;
+}
+#header .item:hover {
+  border-color: #34495E;
+}
+.normal-fw {
+  font-weight: normal!important;
+}
+.sub-info {
+  color: #857f7f;
+  font-size: 12px;
+  margin-top: 12px;
+}
+.ml50 {
+  margin-left: 50px;
+}
+.mt20 {
+  margin-top: 20px!important;
+}
+.fz16 {
+  font-size: 16px!important;
+}
+.fr {
+  float: right;
+}
+.fl {
+  float: left;
+}
+.tac {
+  text-align: center;
+}
+.YaHei {
+  font-family: 'YaHei';
+}
+.cgrey {
+  color: grey;
+}
+.w500 {
+  width: 500px!important;
+}
+.w100 {
+  width: 100px!important;
+}
+.titleSquare {
+  width: 10px;
+  height: 33px;
+  display: block;
+  float: left;
+  margin-right: 10px;
+  background: #1ABD9B;
+}
+#edui1_bottombar {
+  display: none;
+}
