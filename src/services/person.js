@@ -5,10 +5,15 @@
 
 class Person {
 
+	/**
+	 * Creates an instance of Person.
+	 * 
+	 * 
+	 * @memberOf Person
+	 */
 	constructor(){
-
+		
 	}
-
 
 }
 

@@ -67,7 +67,7 @@
 				star:5,
 				solutionName:'巧妙用复制粘贴大法...',
 				solutionUrl:'solution.html#id=1',
-				admited:true
+				admited:true//是否被录取
 			}
 		]
 	}

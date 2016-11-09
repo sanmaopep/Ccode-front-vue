@@ -1,8 +1,7 @@
-import person from './person'
 import Util from './util.js'
 import config from './config.js'
 
-class User extends person {
+class User {
 
 	/**
 	 * 构造函数

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-	import mission from './singleMissionInList.vue'
+	import mission from './singleInList.vue'
 	import search from './selectList.vue'
 	import scrollUtil from '../../services/scrollUtil.js'
 	import scollTop from '../../compenents/scrollTop.vue'

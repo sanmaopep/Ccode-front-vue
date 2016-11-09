@@ -8,7 +8,7 @@
 <script>
 
 import myheader from '../compenents/header.vue'
-import submitForm from './compenents/submitMissionForm.vue'
+import submitForm from './compenents/submit.vue'
 
 export default {
   data(){

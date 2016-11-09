@@ -6,7 +6,6 @@
 </template>
 
 <script>
-
 import myheader from '../compenents/header.vue'
 import submitForm from './compenents/submit.vue'
 

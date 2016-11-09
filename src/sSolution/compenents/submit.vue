@@ -32,7 +32,6 @@
 	import editorrow from '../../compenents/editorRow.vue'
 	import agreerow from '../../compenents/agreeRow.vue'
 
-
 	let data = {
 		originMoney:123456,
 		missionName:'How to be lazy',

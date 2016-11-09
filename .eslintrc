@@ -1,0 +1,17 @@
+//安装gulp-eslint libraries.io/npm/gulp-eslint
+{
+    "parser": "babel-eslint",
+    "globals": {
+        "$": true, //zepto
+        "define": true, //requirejs
+        "require": true //requirejs
+    },
+    "env": {
+        "browser": true, //执行环境 浏览器
+        "node": true, //执行环境Node
+        "es6": true //执行环境Node
+    },
+    "plugins": [
+        "html"
+    ]
+}
