@@ -6,7 +6,7 @@ class User {
     /**
      * 构造函数
      * @param  {[string]} username [用户名]
-     * @param  {[string]} id       [用户id]
+     * @param  {[int]} id       [用户id]
      * @param  {[string]} token    [用户token]
      */
     constructor(username, id, token) {
@@ -22,16 +22,14 @@ class User {
      */
     storeUser(rememberMe) {
         //检测是否存在storge
-        if (!localStorge || !sessionStorge) {
+        if (!localStorage || !sessionStorage) {
             alert("浏览器版本过低，请升级浏览器");
             return;
         }
-        //选择Storge
-        let myStorge = rememberMe ? localStorge : sessionStorge;
 
-        myStorge.setItem('token', this.token);
-        myStorge.setItem('id', this.id);
-        myStorge.setItem('username', this.username);
+        (rememberMe ? localStorage : sessionStorage).setItem('token', this.token);
+        (rememberMe ? localStorage : sessionStorage).setItem('id', this.id);
+        (rememberMe ? localStorage : sessionStorage).setItem('username', this.username);
     }
 
     /**
@@ -39,8 +37,13 @@ class User {
      * @return {[User]} User对象
      */
     static getUser() {
-        let ls = localStorge,
-            ss = sessionStorge;
+        if (!localStorage || !sessionStorage) {
+            alert("浏览器版本过低，请升级浏览器");
+            return;
+        }
+
+        let ls = localStorage,
+            ss = sessionStorage;
 
         //获取user的值
         let username = ls.getItem('username') || ss.getItem('username');
@@ -56,8 +59,8 @@ class User {
      * @return {[undefined]}
      */
     static quitUser() {
-        localStorge.clear();
-        sessionStorge.clear();
+        localStorage.clear();
+        sessionStorage.clear();
     }
 
     /**************************************************************
@@ -83,13 +86,17 @@ class User {
      */
     static register(data) {
         return new Promise((resolve, reject) => {
-            let ret = {};
+            let ret = {
+                userid: 123,
+                token: '123456'
+            };
+            console.log(ret);
             // 成功：
             // 存储用户
-            User.storeUser(data.username, ret.userid, ret.token);
+            new User(data.username, ret.userid, ret.token).storeUser(false);
             resolve();
             // 失败：
-            reject(ret.msg);
+            // reject(ret.msg);
         });
     }
 
@@ -110,13 +117,19 @@ class User {
      */
     static login(data) {
         return new Promise((resolve, reject) => {
-            let ret = {};
+            let ret = {
+                userid: 123,
+                token: '123456'
+            };
             // 成功：
             // 存储用户
-            storeUser(data.username, ret.userid, ret.token);
+            let user = new User(data.username, ret.userid, ret.token);
+            console.log(user);
+            user.storeUser(false);
+            Util.changeView('/');
             resolve();
             // 失败：
-            reject(ret.msg);
+            // reject(ret.msg);
         });
     }
 

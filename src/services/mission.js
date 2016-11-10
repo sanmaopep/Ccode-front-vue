@@ -65,7 +65,22 @@ class Mission {
      */
     static getMissionList(data, pageNum, pageSize) {
         return new Promise((resolve, reject) => {
-
+            let sInList = {
+                title: '如何在做前端的时候偷懒',
+                publishTime: '2015-6-1 10:00:00',
+                className: '移动开发',
+                startDate: '2015-6-1',
+                endDate: '2015-6-15',
+                joinNum: '12',
+                money: '200',
+                link: '#/single/123'
+            }
+            let ret = {
+                    code: 'T',
+                    data: [sInList, sInList, sInList, sInList, sInList, sInList]
+                }
+                //TODO 编辑link
+            resolve(ret.data);
         });
     }
 

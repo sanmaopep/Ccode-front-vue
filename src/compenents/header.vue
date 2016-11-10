@@ -1,20 +1,20 @@
 <style scoped lang="less">
-	#username {
-		font-size: 18px;
-	}
-	
-	.loginButton.item.button {
-		font-size: 18px;
-		display: none;
-	}
-	
-	#username.noLogin {
-		display: none;
-	}
-	
-	.loginButton.item.button.noLogin {
-		display: flex;
-	}
+    #username {
+        font-size: 18px;
+    }
+    
+    .loginButton.item.button {
+        font-size: 18px;
+        display: none;
+    }
+    
+    #username.noLogin {
+        display: none;
+    }
+    
+    .loginButton.item.button.noLogin {
+        display: flex;
+    }
 </style>
 
 <template>
@@ -27,9 +27,9 @@
 						<img src="./assets/header-icon.png" height="381" width="1127" alt="Ccode">
 					</div>
 					<a href="/" class="item" :class="{'active':page == 0}">首页</a>
-					<a href="/peoples" class="item" :class="{'active':page == 1}">人才</a>
+					<a href="/person.html" class="item" :class="{'active':page == 1}">人才</a>
 					<a href="/mission.html" class="item" :class="{'active':page == 2}">任务</a>
-					<a href="/solutions" class="item" :class="{'active':page == 3}">方案</a>
+					<a href="/solution.html" class="item" :class="{'active':page == 3}">方案</a>
 					<div class="right menu">
 						<a href="/singlePeople" id="username" class="item button" v-bind:class="{'noLogin':noLogin}">{{ username }}</a>
 						<a href="user.html#/login" class="loginButton item button" v-bind:class="{'noLogin':noLogin}">登录</a>
@@ -42,21 +42,22 @@
 </template>
 
 <script>
-	import User from '../services/user'
-	
-	let user = User.getUser();
-	
-	let data = {
-		username :undefined,
-		noLogin : false
-	}
-	// 是否登录
-	data.noLogin = (data.username === undefined);
-	
-	export default{
-		props:['page'],
-		data () {
-			return data;
-		}
-	}
+    import User from '../services/user'
+
+    let user = User.getUser();
+    console.log(user);
+
+    let data = {
+            username: user.username,
+            noLogin: false
+        }
+        // 是否登录
+    data.noLogin = (data.username === undefined);
+
+    export default {
+        props: ['page'],
+        data() {
+            return data;
+        }
+    }
 </script>

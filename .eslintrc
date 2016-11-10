@@ -8,7 +8,7 @@
     },
     "env": {
         "browser": true, //执行环境 浏览器
-        "node": true, //执行环境Node
+        // "node": true, //执行环境Node
         "es6": true //执行环境Node
     },
     "plugins": [

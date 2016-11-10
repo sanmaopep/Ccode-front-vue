@@ -8,7 +8,7 @@ class Util {
      * @return {[undefined]}    
      */
     static changeView(url) {
-        window.location.href = config.url + url;
+        window.location.href = url;
     }
 
     /**
