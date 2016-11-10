@@ -3,7 +3,7 @@
  * @class Mission
  * @author maoyiwei
  */
-class Mission{
+class Mission {
 
     /**
      * 添加一个任务 addMission
@@ -14,21 +14,22 @@ class Mission{
      * endDate: '2016/10/11',
      * money: 1234,
      * description: '<p>hello</p>',
+     * token: 'abcddfadfasdf'
      * RET:{
      *  code:"T",
      *  msg:"添加成功"
      * } or {
      *  code:"F",
-     *  msg:"添加失败"
+     *  msg:"没有权限添加任务"
      * }
      * @memberOf Mission
      */
-    static addMission(data){
-        return new Promise((resolve,reject)=>{
+    static addMission(data) {
+        return new Promise((resolve, reject) => {
             resolve();
         });
     }
-    
+
     /**
      * 获取任务列表
      * POST PARAMS:(如果为''则代表可选)
@@ -56,14 +57,14 @@ class Mission{
      *  }
      * }
      * @param {Object} data 检索条件
-     * @param {int} pageNum 
+     * @param {int} pageNum
      * @param {int} pageSize
      * @returns Promise
-     * 
+     *
      * @memberOf Mission
      */
-    static getMissionList(data,pageNum,pageSize){
-        return new Promise((resolve,reject)=>{
+    static getMissionList(data, pageNum, pageSize) {
+        return new Promise((resolve, reject) => {
 
         });
     }
@@ -89,14 +90,12 @@ class Mission{
      * }
      * @param {int} id 任务id
      * @returns
-     * 
+     *
      * @memberOf Mission
      */
 
-    static getMissionContent(id){
-        return new Promise((resolve,reject)=>{
-
-        });
+    static getMissionContent(id) {
+        return new Promise((resolve, reject) => {});
     }
 
     /**
@@ -120,13 +119,13 @@ class Mission{
      *   msg:'获取失败'
      *  }
      * }
-     * 
+     *
      * @param {int} id 任务id
-     * 
+     *
      * @memberOf Mission
      */
-    static getMissionJoin(id){
-        return new Promise((resolve,reject)=>{
+    static getMissionJoin(id) {
+        return new Promise((resolve, reject) => {
 
         });
     }
@@ -150,12 +149,11 @@ class Mission{
      * }
      * @static
      * @param {int} id
-     * 
+     *
      * @memberOf Mission
      */
-    static getMissionComments(id){
-        return new Promise((resolve,reject)=>{
-        });
+    static getMissionComments(id) {
+        return new Promise((resolve, reject) => {});
     }
 
     /**
@@ -163,6 +161,7 @@ class Mission{
      * POST PRAMAS:
      * id:12
      * content:'如何偷懒'
+     * token: 'abcddfadfasdf'
      * RET:{
      *  code:"T",
      *  msg:'添加成功'
@@ -170,17 +169,16 @@ class Mission{
      *   code:'F',
      *   msg:'添加失败'
      *  }
-     * 
+     *
      * @static
      * @param {int} id
      * @param {string} content
      * @returns
-     * 
+     *
      * @memberOf Mission
      */
-    static addMissionComments(id,content){
-        return new Promise((resolve,reject)=>{
-        });
+    static addMissionComments(id, content) {
+        return new Promise((resolve, reject) => {});
     }
 }
 

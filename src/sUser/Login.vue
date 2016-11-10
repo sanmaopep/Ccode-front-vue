@@ -1,20 +1,5 @@
 <style type="less">
-	#body {
-		background-color: #DADADA;
-		height: 100%;
-	}
-	
-	#body .grid {
-		height: 100%;
-	}
-	
-	#body .image {
-		margin-top: -100px;
-	}
-	
-	#body .column {
-		max-width: 450px;
-	}
+    #body { background-color: #DADADA; height: 100%; } #body .grid { height: 100%; } #body .image { margin-top: -100px; } #body .column { max-width: 450px; }
 
 </style>
 
@@ -51,30 +36,30 @@
 </template>
 
 <script>
-import User from '../services/user.js'
+    import User from '../services/user.js'
 
-let data = {
-	formData:{
-		username:"",
-		password:""
-	}
-};
+    let data = {
+        formData: {
+            username: "",
+            password: ""
+        }
+    };
 
-let methods = {
-	clickLogin:()=>{
-		User.login(data.formData).then(()=>{
-			//TODO changeView
-			//
-		},(message)=>{
-			alert(message);
-		});
-	}
-}
+    let methods = {
+        clickLogin: () => {
+            User.login(data.formData).then(() => {
+                //TODO changeView
+                //
+            }, (message) => {
+                alert(message);
+            });
+        }
+    }
 
-export default {
-	data () {
-    	return data;
-  	},
-  	methods:methods
-}
+    export default {
+        data() {
+            return data;
+        },
+        methods: methods
+    }
 </script>

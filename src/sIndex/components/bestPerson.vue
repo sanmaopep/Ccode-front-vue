@@ -1,6 +1,3 @@
-<style lang="less">
-
-</style>
 <template>
 	<div>
 		<div class="ui five column grid" style="margin-top: 35px;padding: 0px 50px;">
@@ -80,3 +77,6 @@
 		}
 	}
 </script>
+<style lang="less">
+
+</style>

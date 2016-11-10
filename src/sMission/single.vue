@@ -8,20 +8,20 @@
 </template>
 
 <script>
-	import myheader from '../compenents/header.vue'
-	import mycontent from './compenents/mContent.vue'
-	import myjoin from './compenents/mJoinPerson.vue'
-	import mycomment from './compenents/mComment.vue'
+    import myheader from '../compenents/header.vue'
+    import mycontent from './compenents/mContent.vue'
+    import myjoin from './compenents/mJoinPerson.vue'
+    import mycomment from './compenents/mComment.vue'
 
-	export default {
-	  data(){
-	    return data;
-	  },
-	  components: {
-	    myheader,
-	    mycontent,
-	    myjoin,
-	    mycomment
-	  }
-	}
+    export default {
+        data() {
+            return data;
+        },
+        components: {
+            myheader,
+            mycontent,
+            myjoin,
+            mycomment
+        }
+    }
 </script>

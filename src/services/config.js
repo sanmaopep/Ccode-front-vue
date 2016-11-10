@@ -1,3 +1,3 @@
 export default {
-	url:"localhost:8080/apiTest/"
+    url: "localhost:8080/apiTest/"
 }
