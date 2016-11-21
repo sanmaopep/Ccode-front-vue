@@ -33,7 +33,7 @@
         }
         data.currPage = 0;
         console.log(req);
-        rmission.getMissionList(req, data.currPage++, 10).then((res) => {
+        rmission.getList(req, data.currPage++, 10).then((res) => {
             data.list = res;
         }, (msg) => {
             alert(msg);
@@ -61,7 +61,7 @@
                     state: data.state,
                     location: data.location
                 }
-                rmission.getMissionList(req, data.currPage++, 10).then((res) => {
+                rmission.getList(req, data.currPage++, 10).then((res) => {
                     for (let i = 0; i < res.length; i++) {
                         data.list.push(res[i]);
                     }

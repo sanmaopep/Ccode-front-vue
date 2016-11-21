@@ -66,10 +66,10 @@
     }
 
     data.images = [{
-        url: '/resource/slider-test.jpg',
+        url: 'resource/slider-test.jpg',
         show: true
     }, {
-        url: '/resource/test2.jpg',
+        url: 'resource/test2.jpg',
         show: false
     }];
     data.imageNum = data.images.length;

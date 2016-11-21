@@ -1,18 +1,19 @@
 <style lang="less" scoped>
-	.animation{
-		transition: all 1s;
-		opacity: 1;
-	}
-	.hideCard{
-		opacity: 0;
-	}
+    .animation {
+        transition: all 1s;
+        opacity: 1;
+    }
+    
+    .hideCard {
+        opacity: 0;
+    }
 </style>
 
 <template>
 	<section class="ui container animation" :class="{'hideCard':hideCard}" style="margin-top: 20px;">
 		<div class="ui segment">
 			<div class="tac">
-				<img class="ui centered medium circular image" src="resource/rabit.jpg">
+				<img class="ui centered medium circular image" :src="avatarUrl">
 			</div>
 			<h1 class="tac ui header">
 				{{ name }}
@@ -41,25 +42,25 @@
 </template>
 
 <script>
-	let data = {
-		hideCard:true,
-		location:'杭州',
-		school:'浙江工业大学',
-		className:'前端开发',
-		name:'毛怡伟',
-		content:'“souyoo，搜游网创造者”，“寓教”品牌缔造者，连续创业者，2015硬件创新奖十强、2015hight客创业硬件件创新奖获得者1999年创办www.souyoo.com搜游网，任CEO 2002～2011年，上海睿网电子有限公司www.rueinet.com，任总经理；'
-	}
+    let data = {
+        hideCard: true,
+        avatarUrl: 'resource/rabit.jpg',
+        location: '杭州',
+        school: '浙江工业大学',
+        className: '前端开发',
+        name: '毛怡伟',
+        content: '“souyoo，搜游网创造者”，“寓教”品牌缔造者，连续创业者，2015硬件创新奖十强、2015hight客创业硬件件创新奖获得者1999年创办www.souyoo.com搜游网，任CEO 2002～2011年，上海睿网电子有限公司www.rueinet.com，任总经理；'
+    }
 
-	export default{
-		created(){
-			let self = this;
-			setTimeout(()=>{
-				self.hideCard = false;
-			},200);
-		},
-		data(){
-			return data;
-		}
-	}
-
+    export default {
+        created() {
+            let self = this;
+            setTimeout(() => {
+                self.hideCard = false;
+            }, 200);
+        },
+        data() {
+            return data;
+        }
+    }
 </script>

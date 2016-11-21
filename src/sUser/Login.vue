@@ -48,10 +48,9 @@
     let methods = {
         clickLogin: () => {
             User.login(data.formData).then(() => {
-                //TODO changeView
-                //
+                //changeView
             }, (message) => {
-                alert(message);
+                // alert(message);
             });
         }
     }

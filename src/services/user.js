@@ -86,17 +86,27 @@ class User {
      */
     static register(data) {
         return new Promise((resolve, reject) => {
-            let ret = {
-                userid: 123,
-                token: '123456'
-            };
-            console.log(ret);
-            // 成功：
-            // 存储用户
-            new User(data.username, ret.userid, ret.token).storeUser(false);
-            resolve();
-            // 失败：
-            // reject(ret.msg);
+            let url = config.url + "appsystem/register";
+            let username = data.username;
+            $.post(url, data,
+                function(data, textStatus, jqXHR) {
+                    if (data.code === "T") {
+                        // alert("注册成功");
+                        // 存储当前用户信息
+                        let user = new User(username, data.userid, data.token);
+                        user.storeUser(false);
+                        Util.changeView('/');
+                        resolve();
+                    } else {
+                        alert(data.msg);
+                        reject();
+                    }
+                },
+                "json"
+            ).error(() => {
+                reject("Fail");
+                alert("注册失败，请检查网络");
+            });
         });
     }
 
@@ -117,19 +127,27 @@ class User {
      */
     static login(data) {
         return new Promise((resolve, reject) => {
-            let ret = {
-                userid: 123,
-                token: '123456'
-            };
-            // 成功：
-            // 存储用户
-            let user = new User(data.username, ret.userid, ret.token);
-            console.log(user);
-            user.storeUser(false);
-            Util.changeView('/');
-            resolve();
-            // 失败：
-            // reject(ret.msg);
+            let url = config.url + "appsystem/sys_login";
+            let username = data.username;
+            $.post(url, data,
+                function(data, textStatus, jqXHR) {
+                    if (data.code === "T") {
+                        // alert("登录成功");
+                        // 存储当前用户信息
+                        let user = new User(username, data.userid, data.token);
+                        user.storeUser(false);
+                        Util.changeView('/');
+                        resolve();
+                    } else {
+                        alert(data.msg);
+                        reject();
+                    }
+                },
+                "json"
+            ).error(() => {
+                reject();
+                alert("登录失败，请检查网络问题");
+            });
         });
     }
 
@@ -153,6 +171,32 @@ class User {
             // 失败：
             reject(ret.msg);
         });
+    }
+
+    /**
+     * 编辑用户个人信息
+     * 
+     * POST PRAMAS:
+     * token:'fdsafasfsaf'
+     * file:图片文件,
+     * content:'啦啦啦啦啦',
+     * className:'移动开发',
+     * location:'杭州',
+     * school:'浙江工业大学'
+     * RET:{
+     *  code:"T",
+     *  msg:'修改失败'
+     *  } or {
+     *   code:'F',
+     *   msg:'修改失败'
+     *  }
+     * @static
+     * @param {any} data
+     * 
+     * @memberOf User
+     */
+    static editInformation(data) {
+        return new Promise((resolve, reject) => {});
     }
 }
 

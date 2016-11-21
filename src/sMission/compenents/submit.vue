@@ -8,8 +8,8 @@
 				<div class="inline field">
 					<label class="normal-fw fz16 w100">任务分类</label>
 					<select class="ui fluid dropdown w500" v-model="formData.className">
-						<option v-for="option in classList" :value="option">
-							{{ option }}
+						<option v-for="option in classList" :value="option.value">
+							{{ option.name }}
 						</option>
 					</select>
 				</div>
@@ -28,74 +28,79 @@
 </template>
 
 <script>
-	import inputrow from '../../compenents/inputRow.vue'
-	import moneyrow from '../../compenents/moneyRow.vue'
-	import monthrow from '../../compenents/monthRow.vue'
-	import editorrow from '../../compenents/editorRow.vue'
-	import agreerow from '../../compenents/agreeRow.vue'
-	import mission from '../../services/mission.js'
+    import inputrow from '../../compenents/inputRow.vue'
+    import moneyrow from '../../compenents/moneyRow.vue'
+    import monthrow from '../../compenents/monthRow.vue'
+    import editorrow from '../../compenents/editorRow.vue'
+    import agreerow from '../../compenents/agreeRow.vue'
+    import mission from '../../services/mission.js'
+    import Util from '../../services/util.js'
 
-	let classList = [
-		'移动开发',
-		'前端开发',
-		'后端开发',
-		'其它'
-	]
+    let classList = [{
+        name: '移动开发',
+        value: '0'
+    }, {
+        name: '前端开发',
+        value: '1'
+    }, {
+        name: '后台开发',
+        value: '2'
+    }]
 
-	let data = {
-		formData:{
-			missionName: '',
-			className: classList[0],
-			startDate: '',
-			endDate: '',
-			money: 0,
-			description: '',
-			
-		},
-		agree: false,
-		eMsg:{
-			missionName: false
-		},
-		classList: classList
-	};
+    let data = {
+        formData: {
+            missionName: '测试题目',
+            className: classList[0].value,
+            startDate: '',
+            endDate: '',
+            money: 0,
+            description: ''
+        },
+        agree: false,
+        eMsg: {
+            missionName: false
+        },
+        classList: classList
+    };
 
-	/* 检查表单 */
-	function checkForm(){
-		if(data.formData.missionName === ''){
-			data.eMsg.missionName = "任务名不得为空" ;
-			return false;
-		}else if(data.formData.missionName.length > 20){
-			data.eMsg.missionName = "任务名不得大于20个字符" ;
-			return false;
-		}else{
-			data.eMsg.missionName = false ;
-			return false;
-		}
-		return true;
-	}
+    /* 检查表单 */
+    function checkForm() {
+        if (data.formData.missionName === '') {
+            data.eMsg.missionName = "任务名不得为空";
+            return false;
+        } else if (data.formData.missionName.length > 20) {
+            data.eMsg.missionName = "任务名不得大于20个字符";
+            return false;
+        } else {
+            data.eMsg.missionName = false;
+            return true;
+        }
+        return true;
+    }
 
-	export default {
-		data() {
-			return data;
-		},
-		components:{
-			inputrow ,
-			moneyrow ,
-			monthrow ,
-			editorrow ,
-			agreerow
-		},
-		methods: {
-			submitForm() {
-				if( checkForm() && data.agree){
-					//TODO 添加任务逻辑
-					mission.addMission().then(()=>{
-						//添加成功
-					},(msg)=>{
-						alert(msg);
-					});
-				}
-			}
-		}
-	}
+    export default {
+        data() {
+            return data;
+        },
+        components: {
+            inputrow,
+            moneyrow,
+            monthrow,
+            editorrow,
+            agreerow
+        },
+        methods: {
+            submitForm() {
+                let template = ["missionName", "className", "startDate", "endDate", "money", "description"];
+                if (checkForm() && data.agree) {
+                    //TODO 添加任务逻辑
+                    mission.add(Util.getSubObject(data.formData, template)).then(() => {
+                        //添加成功
+                    }, (msg) => {
+                        // alert(msg);
+                    });
+                }
+            }
+        }
+    }
 </script>

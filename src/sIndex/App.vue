@@ -16,26 +16,27 @@ div
 </template>
 
 <script>
-import Myheader from '../compenents/header.vue'
-import slider from './components/slider.vue'
-import story from './components/story.vue'
-import statistic from './components/statistic.vue'
-import bestPerson from './components/bestPerson.vue'
-import missionStatistic from './components/missionStatistic.vue'
-import missions from './components/missions.vue'
+    import Myheader from '../compenents/header.vue'
+    import slider from './components/slider.vue'
+    import story from './components/story.vue'
+    import statistic from './components/statistic.vue'
+    import bestPerson from './components/bestPerson.vue'
+    import missionStatistic from './components/missionStatistic.vue'
+    import missions from './components/missions.vue'
 
-export default {
-  components: {
-    Myheader,
-    slider,
-    story,
-    statistic,
-    bestPerson,
-    missionStatistic,
-    missions
-  }
-}
+    export default {
+        components: {
+            Myheader,
+            slider,
+            story,
+            statistic,
+            bestPerson,
+            missionStatistic,
+            missions
+        }
+    }
 </script>
 
 <style lang="less">
+
 </style>

@@ -25,6 +25,15 @@ class Util {
         }
     }
 
+    // 从表单中提取出实际要上传的部分
+    static getSubObject(origin, template) {
+        let ret = {};
+        for (let i = 0; i < template.length; i++) {
+            let key = template[i];
+            ret[key] = origin[key];
+        }
+        return ret;
+    }
 }
 
 export default Util

@@ -1,3 +1,7 @@
+import config from './config'
+import Util from './util'
+import User from './user'
+
 /**
  * 任务类
  * @class Mission
@@ -24,9 +28,29 @@ class Mission {
      * }
      * @memberOf Mission
      */
-    static addMission(data) {
+    static add(data) {
         return new Promise((resolve, reject) => {
-            resolve();
+            let url = config.url + "appmission/addmission";
+            let token = User.getUser().token;
+            data["token"] = token;
+            console.log(data);
+            $.post(url, data,
+                function(data, textStatus, jqXHR) {
+                    console.log(data);
+                    if (data.code === "T") {
+                        alert(data.msg);
+                        Util.changeView('/');
+                        resolve();
+                    } else {
+                        alert(data.msg);
+                        reject();
+                    }
+                },
+                "json"
+            ).error(() => {
+                alert("添加失败，请检查网络");
+                reject();
+            });
         });
     }
 
@@ -37,7 +61,7 @@ class Mission {
      * className:'平面设计'
      * state:'进行中'
      * location:'杭州'
-     * pageNum:2,
+     * pageNum:2
      * pageSize:5
      * RET:{
      *  code:'T',
@@ -50,6 +74,7 @@ class Mission {
      *          endDate:'2015-6-15',
      *          joinNum:'12',
      *          money:'200'
+     *          id:123
      *      }
      *  ] or {
      *      code:'F',
@@ -63,7 +88,7 @@ class Mission {
      *
      * @memberOf Mission
      */
-    static getMissionList(data, pageNum, pageSize) {
+    static getList(data, pageNum, pageSize) {
         return new Promise((resolve, reject) => {
             let sInList = {
                 title: '如何在做前端的时候偷懒',
@@ -109,7 +134,7 @@ class Mission {
      * @memberOf Mission
      */
 
-    static getMissionContent(id) {
+    static getContent(id) {
         return new Promise((resolve, reject) => {});
     }
 
@@ -167,7 +192,7 @@ class Mission {
      *
      * @memberOf Mission
      */
-    static getMissionComments(id) {
+    static getComments(id) {
         return new Promise((resolve, reject) => {});
     }
 
@@ -192,7 +217,7 @@ class Mission {
      *
      * @memberOf Mission
      */
-    static addMissionComments(id, content) {
+    static addComments(id, content) {
         return new Promise((resolve, reject) => {});
     }
 }

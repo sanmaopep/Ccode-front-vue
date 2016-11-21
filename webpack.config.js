@@ -3,65 +3,64 @@ var webpack = require('webpack');
 var myEntry = require('./src/entry.config.js').entry;
 
 module.exports = {
-  entry: myEntry(),
-  output: {
-    path: path.resolve(__dirname, './public/dist'),
-    publicPath: '/dist',
-    filename: '[name].build.js'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue',
-        options: {
-          // vue-loader options go here
+    entry: myEntry(),
+    output: {
+        path: path.resolve(__dirname, './public/dist/'),
+        publicPath: 'dist/',
+        filename: '[name].build.js'
+    },
+    module: {
+        rules: [{
+                test: /\.vue$/,
+                loader: 'vue',
+                options: {
+                    // vue-loader options go here
+                }
+            },
+            {
+                test: /\.js$/,
+                loader: 'babel',
+                exclude: /node_modules/
+            },
+            {
+                test: /\.(png|jpg|gif|svg|woff|eot|ttf)$/,
+                loader: 'file',
+                options: {
+                    name: '[name].[ext]?[hash]'
+                }
+            },
+            { test: /\.css$/, loader: "style-loader!css-loader" }
+        ]
+    },
+    resolve: {
+        alias: {
+            'vue$': 'vue/dist/vue'
         }
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.(png|jpg|gif|svg|woff|eot|ttf)$/,
-        loader: 'file',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
-      },
-      { test: /\.css$/, loader: "style-loader!css-loader" }
-    ]
-  },
-  resolve: {
-    alias: {
-      'vue$': 'vue/dist/vue'
-    }
-  },
-  devServer: {
-    historyApiFallback: true,
-    noInfo: true,
-    contentBase:'./public'
-  },
-  devtool: '#eval-source-map'
+    },
+    devServer: {
+        historyApiFallback: true,
+        noInfo: true,
+        contentBase: './public'
+    },
+    devtool: '#eval-source-map'
 }
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
-  // http://vue-loader.vuejs.org/en/workflow/production.html
-  module.exports.plugins = (module.exports.plugins || []).concat([
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true
-    })
-  ])
+    module.exports.devtool = '#source-map'
+        // http://vue-loader.vuejs.org/en/workflow/production.html
+    module.exports.plugins = (module.exports.plugins || []).concat([
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"production"'
+            }
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        }),
+        new webpack.LoaderOptionsPlugin({
+            minimize: true
+        })
+    ])
 }
