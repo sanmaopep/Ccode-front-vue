@@ -1,3 +1,7 @@
+import User from './user'
+import config from './config'
+import Util from './util'
+
 /**
  * @class some methods about person
  * @author maoyiwei
@@ -37,8 +41,31 @@ class Person {
      * 
      * @memberOf Solution
      */
-    static getList() {
-        return new Promise((resolve, reject) => {});
+    static getList(data, pageNum, pageSize) {
+        console.log("获取人才列表");
+        return new Promise((resolve, reject) => {
+            let url = config.url + "apptalents/talist";
+            let token = User.getUser().token;
+            data["token"] = token;
+            data['pageNum'] = pageNum;
+            data['pageSize'] = pageSize;
+            console.log(data);
+            $.post(url, data,
+                function(data, textStatus, jqXHR) {
+                    console.log(data);
+                    if (data.code === "T") {
+                        resolve(data.data);
+                    } else {
+                        alert(data.msg);
+                        reject();
+                    }
+                },
+                "json"
+            ).error(() => {
+                alert("获取人才列表失败，请检查网络");
+                reject();
+            });
+        });
     }
 
     /**
@@ -66,7 +93,26 @@ class Person {
      * @memberOf Mission
      */
     static getContent(id) {
-        return new Promise((resolve, reject) => {});
+        return new Promise((resolve, reject) => {
+            let url = config.url + 'apptalents/getOnePerson';
+            let token = User.getUser().token;
+            let data = { 'id': id, 'token': token };
+            $.post(url, data,
+                function(data, textStatus, jqXHR) {
+                    if (data.code === "T") {
+                        resolve(data.data);
+                    } else {
+                        alert(data.msg);
+                        reject();
+                    }
+                },
+                "json"
+            ).error(() => {
+                alert("获取人才内容失败，请检查网络");
+                reject();
+            });
+
+        });
     }
 
     /**

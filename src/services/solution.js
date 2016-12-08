@@ -1,3 +1,7 @@
+import config from './config'
+import Util from './util'
+import User from './user'
+
 /**
  * 解决方案类
  * @class Solution
@@ -26,8 +30,29 @@ class Solution {
      * 
      * @memberOf Solution
      */
-    static add() {
-        return new Promise((resolve, reject) => {});
+    static add(data) {
+        return new Promise((resolve, reject) => {
+            let url = config.url + "appsolution/addSolution";
+            let token = User.getUser().token;
+            data["token"] = token;
+            console.log(data);
+            $.post(url, data,
+                function(data, textStatus, jqXHR) {
+                    if (data.code === "T") {
+                        alert(data.msg);
+                        Util.changeView('/');
+                        resolve();
+                    } else {
+                        alert(data.msg);
+                        reject();
+                    }
+                },
+                "json"
+            ).error(() => {
+                alert("添加方案失败，请检查网络");
+                reject();
+            });
+        });
     }
 
     /**
@@ -61,8 +86,28 @@ class Solution {
      * 
      * @memberOf Solution
      */
-    static getList() {
-        return new Promise((resolve, reject) => {});
+    static getList(data, pageNum, pageSize) {
+        return new Promise((resolve, reject) => {
+            let url = config.url + "appsolution/solist";
+            data['pageNum'] = pageNum;
+            data['pageSize'] = pageSize;
+            console.log(data);
+            $.post(url, data,
+                function(data, textStatus, jqXHR) {
+                    console.log(data);
+                    if (data.code === "T") {
+                        resolve(data.data);
+                    } else {
+                        alert(data.msg);
+                        reject();
+                    }
+                },
+                "json"
+            ).error(() => {
+                alert("获取方案列表失败，请检查网络");
+                reject();
+            });
+        });
     }
 
     /**
@@ -86,10 +131,29 @@ class Solution {
      * @param {int} id 方案id
      * @returns
      *
-     * @memberOf Mission
+     * @memberOf Solution
      */
-    static getContent() {
-        return new Promise((resolve, reject) => {});
+    static getContent(id) {
+        return new Promise((resolve, reject) => {
+            let url = config.url + 'appsolution/getOneSolution';
+            let data = { 'id': id };
+            $.post(url, data,
+                function(data, textStatus, jqXHR) {
+                    console.log(data);
+                    if (data.code === "T") {
+                        resolve(data.data);
+                    } else {
+                        alert(data.msg);
+                        reject();
+                    }
+                },
+                "json"
+            ).error(() => {
+                alert("获取方案内容失败，请检查网络");
+                reject();
+            });
+
+        });
     }
 
     /**
@@ -115,7 +179,10 @@ class Solution {
      * @memberOf Mission
      */
     static getComments(id) {
-        return new Promise((resolve, reject) => {});
+        return new Promise((resolve, reject) => {
+
+
+        });
     }
 
     /**

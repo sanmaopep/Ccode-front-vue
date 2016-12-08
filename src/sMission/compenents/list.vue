@@ -21,27 +21,30 @@
         location: '',
         keyword: '',
         list: [],
-        currPage: 0
+        currPage: 1
     }
 
+    // 重新加载任务列表
     function reloadMission() {
+        data.list = [];
         let req = {
             keyword: data.keyword,
             className: data.className,
             state: data.state,
             location: data.location
         }
-        data.currPage = 0;
+        data.currPage = 1;
         console.log(req);
-        rmission.getList(req, data.currPage++, 10).then((res) => {
-            data.list = res;
-        }, (msg) => {
-            alert(msg);
-        });
+        rmission.getList(req, data.currPage++, 8).then((res) => {
+            for (let i = 0; i < res.length; i++) {
+                // 添加link
+                res[i]["link"] = '#/single/' + res[i]["id"];
+                data.list.push(res[i]);
+            }
+        }, (msg) => {});
     }
 
     reloadMission();
-
 
     export default {
         data() {
@@ -61,13 +64,13 @@
                     state: data.state,
                     location: data.location
                 }
-                rmission.getList(req, data.currPage++, 10).then((res) => {
+                rmission.getList(req, data.currPage++, 8).then((res) => {
                     for (let i = 0; i < res.length; i++) {
+                        // 添加link
+                        res[i]["link"] = '#/single/' + res[i]["id"];
                         data.list.push(res[i]);
                     }
-                }, (msg) => {
-                    alert(msg);
-                });
+                }, (msg) => {});
             },
             // 更改筛选条件
             changeSelect(selection) {
@@ -75,13 +78,11 @@
                 data.location = selection.location;
                 data.state = selection.state;
                 data.keyword = '';
-                this.list = [];
                 setTimeout(reloadMission, 100);
             },
             // 按下搜索按钮
             submitSearch(keyword) {
                 data.keyword = keyword;
-                this.list = [];
                 setTimeout(reloadMission, 100);
             }
         },

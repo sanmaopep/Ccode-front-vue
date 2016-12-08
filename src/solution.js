@@ -15,7 +15,7 @@ const router = new VueRouter({
     routes: [
         { path: '/', component: List },
         { path: '/list', component: List },
-        { path: '/submit', component: Submit },
+        { path: '/submit/:id/:missionTitle/:money', component: Submit },
         { path: '/single/:id', component: Single }
     ]
 });

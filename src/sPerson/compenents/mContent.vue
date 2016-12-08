@@ -10,7 +10,7 @@
 </style>
 
 <template>
-	<section class="ui container animation" :class="{'hideCard':hideCard}" style="margin-top: 20px;">
+	<section class="ui container animation" style="margin-top: 20px;">
 		<div class="ui segment">
 			<div class="tac">
 				<img class="ui centered medium circular image" :src="avatarUrl">
@@ -42,6 +42,8 @@
 </template>
 
 <script>
+    import person from '../../services/person'
+
     let data = {
         hideCard: true,
         avatarUrl: 'resource/rabit.jpg',
@@ -52,12 +54,25 @@
         content: '“souyoo，搜游网创造者”，“寓教”品牌缔造者，连续创业者，2015硬件创新奖十强、2015hight客创业硬件件创新奖获得者1999年创办www.souyoo.com搜游网，任CEO 2002～2011年，上海睿网电子有限公司www.rueinet.com，任总经理；'
     }
 
+    //获取人才内容
+    function getPersonContent(id) {
+        person.getContent(id).then((res) => {
+            for (let key in res) {
+                data[key] = res[key];
+            }
+        }, (msg) => {
+            // alert(msg);
+        });
+    }
+
     export default {
+        props: ['mID'],
         created() {
             let self = this;
             setTimeout(() => {
                 self.hideCard = false;
             }, 200);
+            getPersonContent(self.mID);
         },
         data() {
             return data;

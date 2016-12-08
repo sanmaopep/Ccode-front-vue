@@ -6,7 +6,7 @@
 			<div class="ui form" style="padding-left: 50px;" id="submitMissionForm">
 				<div class="inline field">
 					<label class="normal-fw fz16 w100">任务名称</label>
-					<input class="w500" type="text" :value="missionName" disabled>
+					<input class="w500" type="text" :value="title" disabled>
 					<a :href="missionLink" class="ui button">查看</a>
 				</div>
 				<div class="inline field">
@@ -27,53 +27,74 @@
 </template>
 
 <script>
-	import inputrow from '../../compenents/inputRow.vue'
-	import moneyrow from '../../compenents/moneyRow.vue'
-	import editorrow from '../../compenents/editorRow.vue'
-	import agreerow from '../../compenents/agreeRow.vue'
-
-	let data = {
-		originMoney:123456,
-		missionName:'How to be lazy',
-		missionLink:'#mission',
-		formData:{
-			solutionName:'',
-			missionID: 123,
-			money: 0,
-			description: '',
-			agree: false
-		},
-		eMsg:{
-			solutionName:''
-		}
-	};
-
-	/* 检查表单 */
-	function checkForm(){
-		if(data.formData.solutionName === ''){
-			data.eMsg.solutionName = "方案名不得为空" ;
-		}else if(data.formData.solutionName.length > 20){
-			data.eMsg.solutionName = "方案名不得大于20个字符" ;
-		}else{
-			data.eMsg.solutionName = false ;
-		}
-	}
+    import inputrow from '../../compenents/inputRow.vue'
+    import moneyrow from '../../compenents/moneyRow.vue'
+    import editorrow from '../../compenents/editorRow.vue'
+    import agreerow from '../../compenents/agreeRow.vue'
+    import Util from '../../services/util.js'
+    import solution from '../../services/solution.js'
 
 
-	export default {
-		data() {
-			return data;
-		},
-		components:{
-			inputrow,
-			moneyrow ,
-			editorrow ,
-			agreerow
-		},
-		methods: {
-			submitForm() {
-				checkForm();
-			}
-		}
-	}
+    let data = {
+        originMoney: 123456,
+        missionName: 'How to be lazy',
+        missionLink: '#mission',
+        formData: {
+            solutionName: '如何在做前端的时候偷懒',
+            missionID: 123,
+            money: 0,
+            description: '',
+            agree: false
+        },
+        eMsg: {
+            solutionName: ''
+        }
+    };
+
+    /* 检查表单 */
+    function checkForm() {
+        if (data.formData.solutionName === '') {
+            data.eMsg.solutionName = "方案名不得为空";
+            return false;
+        } else if (data.formData.solutionName.length > 20) {
+            data.eMsg.solutionName = "方案名不得大于20个字符";
+            return false;
+        } else {
+            data.eMsg.solutionName = false;
+            return true;
+        }
+
+        return true;
+    }
+
+
+    export default {
+        props: ['title', 'mID', 'originMoney'],
+        data() {
+            return data;
+        },
+        created() {
+            data.missionLink = 'mission.html#/single/' + this.mID;
+            data.formData.missionID = this.mID;
+        },
+        components: {
+            inputrow,
+            moneyrow,
+            editorrow,
+            agreerow
+        },
+        methods: {
+            // 提交表单
+            submitForm() {
+                if (checkForm() && data.formData.agree) {
+                    let template = ["solutionName", "missionID", "money", "description"];
+                    solution.add(Util.getSubObject(data.formData, template)).then(() => {
+                        //添加成功
+                    }, (msg) => {
+                        // alert(msg);
+                    });
+                }
+            }
+        }
+    }
 </script>

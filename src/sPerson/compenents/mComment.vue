@@ -1,16 +1,17 @@
 <style lang="less" scoped>
-	.animation{
-		transition: all 1.5s;
-		opacity: 1;
-	}
-	.hideCard{
-		opacity: 0;
-	}
+    .animation {
+        transition: all 1.5s;
+        opacity: 1;
+    }
+    
+    .hideCard {
+        opacity: 0;
+    }
 </style>
 
 
 <template>
-	<section class="ui container animation" :class="{'hideCard':hideCard}" style="margin-top: 20px;">
+	<section class="ui container animation" style="margin-top: 20px;">
 		<div class="ui segment">
 			<h2 class="ui header normal-fw"><span class="titleSquare"></span>评论</h2>
 			<div class="ui divider"></div>
@@ -41,41 +42,39 @@
 </template>
 
 <script>
-	import scroll from '../../services/scrollUtil.js'
+    import scroll from '../../services/scrollUtil.js'
 
-	let data ={
-		hideCard: true,
-		comments:[
-			{
-				avatarUrl:'resource/cute.jpg',
-				name:'十三三长得高',
-				time:'2016/5/5 12:00',
-				content:'话说研究如何在前端偷懒是一件非常有意义的事情'
-			}
-		],
-		replyContent:''
-	}
+    let data = {
+        hideCard: true,
+        comments: [{
+            avatarUrl: 'resource/cute.jpg',
+            name: '十三三长得高',
+            time: '2016/5/5 12:00',
+            content: '话说研究如何在前端偷懒是一件非常有意义的事情'
+        }],
+        replyContent: ''
+    }
 
-	export default{
-		mounted(){
-			let self = this
-			scroll.scrollToDOMShow(this.$el,() => {
-				setTimeout(()=>{
-					self.hideCard = false;
-				},100);
-			});
-		},
-		data(){
-			return data;
-		},
-		methods:{
-			reply(){
-				if(data.replyContent == ''){
-					alert("评论不得为空");
-				}else{
-					//TODO 评论不为空的情况
-				}
-			}
-		}
-	}
+    export default {
+        mounted() {
+            let self = this
+            scroll.scrollToDOMShow(this.$el, () => {
+                setTimeout(() => {
+                    self.hideCard = false;
+                }, 100);
+            });
+        },
+        data() {
+            return data;
+        },
+        methods: {
+            reply() {
+                if (data.replyContent == '') {
+                    alert("评论不得为空");
+                } else {
+                    //TODO 评论不为空的情况
+                }
+            }
+        }
+    }
 </script>

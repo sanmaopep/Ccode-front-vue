@@ -13,7 +13,7 @@
     import myjoin from './compenents/mJoinPerson.vue'
     import mycomment from './compenents/mComment.vue'
 
-    let data = {};  
+    let data = {};
 
     export default {
         data() {

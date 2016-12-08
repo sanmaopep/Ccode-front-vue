@@ -1,18 +1,19 @@
 <style lang="less" scoped>
-	.animation{
-		transition: all 1.5s;
-		position: relative;
-		top: 0px;
-		opacity: 1;
-	}
-	.hideCard{
-		top: 30px;
-		opacity: 0;
-	}
+    .animation {
+        transition: all 1.5s;
+        position: relative;
+        top: 0px;
+        opacity: 1;
+    }
+    
+    .hideCard {
+        top: 30px;
+        opacity: 0;
+    }
 </style>
 
 <template>
-	<section class="ui container animation" :class="{'hideCard':hideCard}" style="margin-top: 20px;">
+	<section class="ui container animation" style="margin-top: 20px;">
 		<div class="ui segment">
 			<h2 class="ui header normal-fw"><span class="titleSquare"></span>参与方案</h2>
 			<div class="ui divider"></div>
@@ -54,37 +55,35 @@
 </template>
 
 <script>
-	import scroll from '../../services/scrollUtil.js'
+    import scroll from '../../services/scrollUtil.js'
 
-	let data = {
-		hideCard: true,
-		people:[
-			{
-				avatarUrl:'resource/rabit.jpg',
-				name:'十三三长得高',
-				school:'蓝翔技术学院',
-				applyMoney:'1000',
-				star:5,
-				solutionName:'巧妙用复制粘贴大法...',
-				solutionUrl:'solution.html#id=1',
-				admited:true//是否被录取
-			}
-		]
-	}
+    let data = {
+        hideCard: true,
+        people: [{
+            avatarUrl: 'resource/rabit.jpg',
+            name: '十三三长得高',
+            school: '蓝翔技术学院',
+            applyMoney: '1000',
+            star: 5,
+            solutionName: '巧妙用复制粘贴大法...',
+            solutionUrl: 'solution.html#id=1',
+            admited: true //是否被录取
+        }]
+    }
 
 
-	export default{
-		mounted(){
-			let self = this;
-			scroll.scrollToDOMShow(this.$el,() => {
-				setTimeout(()=>{
-					self.hideCard = false;
-				},100);
-			});
-		},
-		data(){
-			return data;
-		}
+    export default {
+        mounted() {
+            let self = this;
+            scroll.scrollToDOMShow(this.$el, () => {
+                setTimeout(() => {
+                    self.hideCard = false;
+                }, 100);
+            });
+        },
+        data() {
+            return data;
+        }
 
-	}
+    }
 </script>

@@ -80,7 +80,7 @@
             value: "ENTERPRISE"
         }, {
             name: "教师",
-            value: "REVIER"
+            value: "REVIEWER"
         }],
         formData: {
             username: "sanmaopep1",

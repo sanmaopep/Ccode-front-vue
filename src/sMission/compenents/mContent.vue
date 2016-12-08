@@ -12,7 +12,7 @@
     }
 </style>
 <template>
-	<section class="ui container animation" :class="{'hideCard':hideCard}" style="margin-top: 20px;">
+	<section class="ui container animation" style="margin-top: 20px;">
 		<div class="ui segment">
 			<h1 class="ui header normal-fw"><span class="titleSquare"></span>{{ title }}</h1>
 			<div class="ui divider" style="margin-bottom: 0px;"></div>
@@ -38,7 +38,7 @@
 				</div>
 			</div>
 		</div>
-		<a href="#" class="ui fluid button">立即参与</a>
+		<a :href="solutionAddUrl" class="ui fluid button">立即参与</a>
 	</section>
 </template>
 <script>
@@ -53,20 +53,22 @@
         writer: '毛怡伟',
         content: '<p>公司之间永远存在竞争，看谁来的早，看谁来的晚，看谁泡面吃的多，看谁黑眼圈最大，然而领先的公司不同，他们比的是看谁更会玩健康，看谁的团队更团结。让我们拭目以待杭城的第一座互联网健身房属于哪一个“最健”团队！</p><p>公司之间永远存在竞争，看谁来的早，看谁来的晚，看谁泡面吃的多，看谁黑眼圈最大，然而领先的公司不同，他们比的是看谁更会玩健康，看谁的团队更团结。让我们拭目以待杭城的第一座互联网健身房属于哪一个“最健”团队！</p><p>公司之间永远存在竞争，看谁来的早，看谁来的晚，看谁泡面吃的多，看谁黑眼圈最大，然而领先的 <img src = "resource/test-image.png" / > ',
         startTime: '2016/10/31',
-        endTime: '2016/11/5'
+        endTime: '2016/11/5',
+        money: 123,
+        solutionAddUrl: "#"
     }
 
     //获取任务内容
-    function getMissionContent() {
-        mission.getMissionContent(data.mID).then((res) => {
-            for (key in res) {
+    function getMissionContent(id) {
+        mission.getContent(id).then((res) => {
+            for (let key in res) {
                 data[key] = res[key];
             }
+            data.solutionAddUrl = "solution.html#/submit/" + id + '/' + data.title + '/' + data.money;
         }, (msg) => {
-            alert(msg)
+            // alert(msg);
         });
     }
-
     export default {
         props: ['mID'],
         created() {
@@ -74,7 +76,9 @@
             setTimeout(() => {
                 self.hideCard = false;
             }, 200);
-            getMissionContent();
+            getMissionContent(self.mID);
+            data.solutionAddUrl = "solution.html#/submit/" + self.mID + '/' + self.title + '/' + self.money;
+
         },
         data() {
             return data;

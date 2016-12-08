@@ -35,6 +35,7 @@
     import agreerow from '../../compenents/agreeRow.vue'
     import mission from '../../services/mission.js'
     import Util from '../../services/util.js'
+    import constant from '../../services/constant.js'
 
     let classList = [{
         name: '移动开发',
@@ -42,9 +43,6 @@
     }, {
         name: '前端开发',
         value: '1'
-    }, {
-        name: '后台开发',
-        value: '2'
     }]
 
     let data = {
@@ -62,6 +60,16 @@
         },
         classList: classList
     };
+
+    // 获取任务类别列表
+    constant.getClassNameList().then((classList) => {
+        // 获取成功
+        data.classList = classList;
+    }, () => {
+        // 获取失败
+    })
+
+
 
     /* 检查表单 */
     function checkForm() {

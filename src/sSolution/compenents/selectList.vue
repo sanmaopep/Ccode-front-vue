@@ -4,16 +4,16 @@
 			<div class="ui top attached segment">
 				<div class="ui secondary menu">
 					<strong class="item" style="font-weight: bold;">分类:</strong>
-					<a v-for="(item,index) in className" class="item" :class="{'active': index === currClass}" @click="clickSelction(0,index)">{{ item }}</a>
+					<a v-for="(item,index) in className" class="item" :class="{'active': index === currClass}" @click="clickSelction(0,index)">{{ item.name }}</a>
 					
 				</div>
 				<div class="ui secondary menu">
 					<strong class="item" style="font-weight: bold;">状态:</strong>
-					<a v-for="(item,index) in state" class="item" :class="{'active': index === currState}" @click="clickSelction(1,index)">{{ item }}</a>
+					<a v-for="(item,index) in state" class="item" :class="{'active': index === currState}" @click="clickSelction(1,index)">{{ item.name }}</a>
 				</div>
 				<div class="ui secondary menu">
 					<strong class="item" style="font-weight: bold;">地区:</strong>
-					<a v-for="(item,index) in location" class="item" :class="{'active': index === currLocation}" @click="clickSelction(2,index)">{{ item }}</a>
+					<a v-for="(item,index) in location" class="item" :class="{'active': index === currLocation}" @click="clickSelction(2,index)">{{ item.name }}</a>
 				</div>
 			</div>
 			<div class="ui clearing bottom attached segment" style="padding: 5px;background: #EFF0F4;">
@@ -28,76 +28,109 @@
 </template>
 
 <script>
-	let data = {
-		keyword:'',
-		itemNum:12,
-		currClass:0,
-		currState:0,
-		currLocation:1,
-		className:[
-			'全部',
-			'平面设计',
-			'前端开发',
-			'UI设计',
-			'移动开发',
-			'后端开发'
-		],
-		state:[
-			'全部',
-			'未开始',
-			'进行中',
-			'已结束'
-		],
-		location:[
-			'全部',
-			'杭州',
-			'温州'
-		]
-	}
+    import constant from '../../services/constant.js'
 
-	// sortNum used in clickSelction
-	const CLASS = 0;
-	const STATE = 1;
-	const LOCATION = 2;
+    let data = {
+        keyword: '',
+        itemNum: 12,
+        currClass: 0,
+        currState: 0,
+        currLocation: 0,
+        className: [{
+            name: "全部",
+            value: ""
+        }],
+        state: [{
+            name: '全部',
+            value: ''
+        }, {
+            name: '未开始',
+            value: '未开始'
+        }, {
+            name: '进行中',
+            value: '进行中'
+        }, {
+            name: '已结束',
+            value: '已结束'
+        }],
+        location: [{
+            name: "全部",
+            value: ""
+        }]
+    }
 
-	export default{
-		data(){
-			return data;
-		},
-		mounted(){
-			let retData = {
-				class: data.className[data.currClass],
-				state: data.state[data.currState],
-				location: data.location[data.currLocation]
-			}
-			this.$emit('change',retData);
-		},
-		methods:{
-			clickSelction(sortNum,index){
-				switch(sortNum){
-					case CLASS:
-						data.currClass = index;
-						break;
-					case STATE:
-						data.currState = index;
-						break;
-					case LOCATION:
-						data.currLocation = index;
-						break;
-					default:
-						break;
-				}
-				let retData = {
-					class: data.className[data.currClass],
-					state: data.state[data.currState],
-					location: data.location[data.currLocation]
-				}
-				this.$emit('change',retData);
-			},
-			submitSearch(){
-				this.$emit('search',data.keyword);
-			}
-		}
-	}
+    // 获取class列表
+    constant.getClassNameList().then((classList) => {
+        // 获取成功
+        for (let i = 0; i < classList.length; i++) {
+            classList[i].value = classList[i].name;
+        }
 
+        classList.unshift({
+            name: "全部",
+            value: ''
+        });
+        data.className = classList;
+    }, () => {
+        // 获取失败
+    });
+    // 获取location列表
+    constant.getLocationList().then((areaList) => {
+        // 获取成功
+        for (let i = 0; i < areaList.length; i++) {
+            areaList[i].value = areaList[i].name;
+        }
+        areaList.unshift({
+            name: "全部",
+            value: ''
+        });
+        data.location = areaList;
+    }, () => {
+        // 获取失败
+    });
+
+    // sortNum used in clickSelction
+    const CLASS = 0;
+    const STATE = 1;
+    const LOCATION = 2;
+
+    export default {
+        data() {
+            return data;
+        },
+        mounted() {
+            let retData = {
+                class: data.className[data.currClass].value,
+                state: data.state[data.currState].value,
+                location: data.location[data.currLocation].value
+            }
+            this.$emit('change', retData);
+        },
+        methods: {
+            clickSelction(sortNum, index) {
+                switch (sortNum) {
+                    case CLASS:
+                        data.currClass = index;
+                        break;
+                    case STATE:
+                        data.currState = index;
+                        break;
+                    case LOCATION:
+                        data.currLocation = index;
+                        break;
+                    default:
+                        break;
+                }
+                let retData = {
+                    class: data.className[data.currClass].value,
+                    state: data.state[data.currState].value,
+                    location: data.location[data.currLocation].value
+                }
+                this.$emit('change', retData);
+            },
+            submitSearch() {
+                this.$emit('search', data.keyword);
+            }
+        }
+    }
 </script>
