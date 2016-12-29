@@ -45,11 +45,12 @@
     }
 
     //获取方案内容
-    function getSolutionContent(id) {
+    function getSolutionContent(id, scall) {
         solution.getContent(id).then((res) => {
             for (let key in res) {
                 data[key] = res[key];
             }
+            scall();
         }, (msg) => {
             alert(msg);
         });
@@ -62,7 +63,10 @@
             setTimeout(() => {
                 self.hideCard = false;
             }, 200);
-            getSolutionContent(self.mID);
+            getSolutionContent(self.mID, () => {
+                self.$emit("getuser", self.writer);
+            });
+
         },
         data() {
             return data;

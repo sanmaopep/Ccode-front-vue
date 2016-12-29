@@ -9,41 +9,44 @@
 </template>
 
 <script>
-	import solution from './singleSolution.vue'
-	import scrollUtil from '../../services/scrollUtil.js'
-	import scollTop from '../../compenents/scrollTop.vue'
+    import solution from './singleSolution.vue'
+    import scrollUtil from '../../services/scrollUtil.js'
+    import scollTop from '../../compenents/scrollTop.vue'
+    import person from '../../services/person.js'
 
-	let solutionList = [
-		{
-			title:'如何在做前端的时候偷懒',
-			avatarUrl:'resource/rabit.jpg',
-			detail:'测试内容...',
-			className:'移动开发',
-			writer:'haha',
-			money:'200',
-			link:'#solutionID=12'
-		}
-	]
+    let data = {
+        list: []
+    }
 
-	export default{
-		data(){
-			return {
-				list:solutionList
-			}
-		},
-		mounted(){
-			let self = this;
-			
-		},
-		methods:{
-			loadMore() {
-				
-				
-			}
-		},
-		components:{
-			solution,
-			scollTop
-		}
-	}
+    function getList(id) {
+        person.getPersonList(id).then((res) => {
+            // 获取评论成功
+            for (let i = 0; i < res.length; i++) {
+                // 添加link
+                res[i]["link"] = 'solution.html#/single/' + res[i]["id"];
+                data.list.push(res[i]);
+            }
+        }, () => {
+            // 失败
+        });
+    }
+
+
+    export default {
+        props: ["mID"],
+        data() {
+            return data;
+        },
+        created() {
+            let self = this;
+            getList(self.mID);
+        },
+        methods: {
+
+        },
+        components: {
+            solution,
+            scollTop
+        }
+    }
 </script>

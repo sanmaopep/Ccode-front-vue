@@ -188,7 +188,23 @@ class Mission {
      */
     static getMissionJoin(id) {
         return new Promise((resolve, reject) => {
-
+            let url = config.url + 'appsolution/getMissionPerson';
+            let data = { 'id': id };
+            $.post(url, data,
+                function(data, textStatus, jqXHR) {
+                    console.log(data);
+                    if (data.code === "T") {
+                        resolve(data.data);
+                    } else {
+                        alert(data.msg);
+                        reject();
+                    }
+                },
+                "json"
+            ).error(() => {
+                alert("获取参与人失败，请检查网络");
+                reject();
+            });
         });
     }
 
@@ -215,7 +231,27 @@ class Mission {
      * @memberOf Mission
      */
     static getComments(id) {
-        return new Promise((resolve, reject) => {});
+        return new Promise((resolve, reject) => {
+            let url = config.url + 'appmission/getMiComments';
+            let data = { 'id': id };
+
+            $.post(url, data,
+                function(data, textStatus, jqXHR) {
+                    console.log(data);
+                    if (data.code === "T") {
+                        resolve(data.data);
+                    } else {
+                        alert(data.msg);
+                        reject();
+                    }
+                },
+                "json"
+            ).error(() => {
+                alert("获取评论失败，请检查网络");
+                reject();
+            });
+
+        });
     }
 
     /**
@@ -240,7 +276,54 @@ class Mission {
      * @memberOf Mission
      */
     static addComments(id, content) {
-        return new Promise((resolve, reject) => {});
+        return new Promise((resolve, reject) => {
+            let url = config.url + 'appmission/addMiComment';
+            let token = User.getUser().token;
+            let data = { 'id': id, 'content': content, 'token': token };
+            console.log(data);
+            $.post(url, data,
+                function(data, textStatus, jqXHR) {
+                    console.log(data);
+                    if (data.code === "T") {
+                        resolve();
+                    } else {
+                        alert(data.msg);
+                        reject();
+                    }
+                },
+                "json"
+            ).error(() => {
+                alert("添加评论失败，请检查网络");
+                reject();
+            });
+        });
+    }
+
+    // 删除任务
+    static delete(id) {
+        return new Promise((resolve, reject) => {
+            let url = config.url + 'appmission/delMission';
+            let token = User.getUser().token;
+            let data = { 'id': id, 'token': token };
+            console.log(data);
+            $.post(url, data,
+                function(data, textStatus, jqXHR) {
+                    console.log(data);
+                    if (data.code === "T") {
+                        resolve();
+                        alert("删除成功");
+                        Util.changeView('/');
+                    } else {
+                        alert(data.msg);
+                        reject();
+                    }
+                },
+                "json"
+            ).error(() => {
+                alert("删除任务失败，请检查网络");
+                reject();
+            });
+        });
     }
 }
 

@@ -42,17 +42,17 @@ class Person {
      * @memberOf Solution
      */
     static getList(data, pageNum, pageSize) {
-        console.log("获取人才列表");
+        // console.log("获取人才列表");
         return new Promise((resolve, reject) => {
             let url = config.url + "apptalents/talist";
             let token = User.getUser().token;
             data["token"] = token;
             data['pageNum'] = pageNum;
             data['pageSize'] = pageSize;
-            console.log(data);
+            // console.log(data);
             $.post(url, data,
                 function(data, textStatus, jqXHR) {
-                    console.log(data);
+                    // console.log(data);
                     if (data.code === "T") {
                         resolve(data.data);
                     } else {
@@ -139,7 +139,27 @@ class Person {
      * @memberOf Mission
      */
     static getComments(id) {
-        return new Promise((resolve, reject) => {});
+        return new Promise((resolve, reject) => {
+            const url = config.url + 'apptalents/getTaComments';
+            let token = User.getUser().token;
+            let data = { 'id': id, 'token': token };
+            console.log(data);
+            $.post(url, data,
+                function(data, textStatus, jqXHR) {
+                    console.log(data);
+                    if (data.code === "T") {
+                        resolve(data.data);
+                    } else {
+                        alert(data.msg);
+                        reject();
+                    }
+                },
+                "json"
+            ).error(() => {
+                alert("获取评论失败，请检查网络");
+                reject();
+            });
+        });
     }
 
     /**
@@ -164,9 +184,81 @@ class Person {
      * @memberOf Mission
      */
     static addComments(id, content) {
-        return new Promise((resolve, reject) => {});
+        return new Promise((resolve, reject) => {
+            const url = config.url + 'apptalents/addTaComment';
+            let token = User.getUser().token;
+            let data = { 'id': id, 'content': content, 'token': token };
+            // console.log(data);
+            $.post(url, data,
+                function(data, textStatus, jqXHR) {
+                    // console.log(data);
+                    if (data.code === "T") {
+                        resolve();
+                    } else {
+                        alert(data.msg);
+                        reject();
+                    }
+                },
+                "json"
+            ).error(() => {
+                alert("添加评论失败，请检查网络");
+                reject();
+            });
+
+
+        });
     }
 
+    /**
+     * 获取对应人才方案列表
+     * POST PRAMAS:
+     * personid: 123
+     * token: 'dfsafasfasf'
+     * RET:{
+     *  code:"T",
+     *  data:[
+     *      {
+     *          title:'如何在做前端的时候偷懒',
+     *          avatarUrl:'resource/rabit.jpg',
+     *          detail:'测试内容...',
+     *          className:'移动开发',
+     *          writer:'haha',
+     *          money:'200',
+     *          id:'234
+     *      }
+     *  ]
+     *  } or {
+     *   code:'F',
+     *   msg:'无权限访问人才库'
+     *  }
+     * @static
+     * @returns
+     * 
+     * @memberOf Solution
+     */
+    static getPersonList(id) {
+        return new Promise((resolve, reject) => {
+            const url = config.url + 'apptalents/getPerSoList';
+            let token = User.getUser().token;
+            let data = { 'personid': id, 'token': token };
+            console.log(data);
+            $.post(url, data,
+                function(data, textStatus, jqXHR) {
+                    console.log(data);
+                    if (data.code === "T") {
+                        resolve(data.data);
+                    } else {
+                        alert(data.msg);
+                        reject();
+                    }
+                },
+                "json"
+            ).error(() => {
+                alert("获取成长历程失败，请检查网络");
+                reject();
+            });
+        });
+    }
 }
 
 export default Person

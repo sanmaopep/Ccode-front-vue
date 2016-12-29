@@ -56,23 +56,24 @@
 
 <script>
     import scroll from '../../services/scrollUtil.js'
+    import mission from '../../services/mission.js'
 
     let data = {
         hideCard: true,
-        people: [{
-            avatarUrl: 'resource/rabit.jpg',
-            name: '十三三长得高',
-            school: '蓝翔技术学院',
-            applyMoney: '1000',
-            star: 5,
-            solutionName: '巧妙用复制粘贴大法...',
-            solutionUrl: 'solution.html#id=1',
-            admited: true //是否被录取
-        }]
+        people: []
     }
 
+    function getJoin(id) {
+        mission.getMissionJoin(id).then((res) => {
+            // 成功了
+            data.people = res;
+        }, () => {
+            // 失败了
+        });
+    }
 
     export default {
+        props: ['mID'],
         mounted() {
             let self = this;
             scroll.scrollToDOMShow(this.$el, () => {
@@ -80,6 +81,7 @@
                     self.hideCard = false;
                 }, 100);
             });
+            getJoin(self.mID);
         },
         data() {
             return data;

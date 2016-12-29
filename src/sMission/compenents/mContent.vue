@@ -26,6 +26,7 @@
 			<div id="missionContent" v-html="content">
 			</div>
 		</div>
+        <a @click="deleteMe" class="ui fluid button" v-if="canDel">删除任务</a>
 		<div class="ui segment">
 			<div class="ui two statistics">
 				<div class="statistic">
@@ -38,11 +39,12 @@
 				</div>
 			</div>
 		</div>
-		<a :href="solutionAddUrl" class="ui fluid button">立即参与</a>
+		<a :href="solutionAddUrl" class="ui fluid button">立即参与</a>   
 	</section>
 </template>
 <script>
     import mission from '../../services/mission.js'
+    import User from '../../services/user.js'
 
     let data = {
         mID: 123,
@@ -55,7 +57,8 @@
         startTime: '2016/10/31',
         endTime: '2016/11/5',
         money: 123,
-        solutionAddUrl: "#"
+        solutionAddUrl: "#",
+        canDel: false
     }
 
     //获取任务内容
@@ -65,6 +68,7 @@
                 data[key] = res[key];
             }
             data.solutionAddUrl = "solution.html#/submit/" + id + '/' + data.title + '/' + data.money;
+            data.canDel = (User.getUser().username === data.writer);
         }, (msg) => {
             // alert(msg);
         });
@@ -82,6 +86,15 @@
         },
         data() {
             return data;
+        },
+        methods: {
+            deleteMe() {
+                mission.delete(this.mID).then(() => {
+                    // 删除成功
+                }, () => {
+                    // 删除失败
+                });
+            }
         }
     }
 </script>

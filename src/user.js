@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Register from './sUser/Register.vue'
 import Login from './sUser/Login.vue'
+import myInfo from './sPerson/single.vue'
 
 $.ajaxSetup({
     async: false
@@ -14,7 +15,8 @@ const router = new VueRouter({
     routes: [
         { path: '/', component: Login },
         { path: '/login', component: Login },
-        { path: '/register', component: Register }
+        { path: '/register', component: Register },
+        { path: '/myinfo/:id', component: myInfo }
     ]
 });
 

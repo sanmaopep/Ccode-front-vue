@@ -16,7 +16,7 @@
 				<monthrow label="开始日期" v-model="formData.startDate"></monthrow>
 				<monthrow label="结束日期" v-model="formData.endDate"></monthrow>
 				<moneyrow label="悬赏" v-model="formData.money"></moneyrow>
-				<editorrow label="任务说明" v-model="formData.description"></editorrow>
+				<editorrow label="任务说明" v-model="formData.description"></editorrow> 
 				<agreerow v-model="agree"></agreerow>
       			<div class="inline field">
 					<label class="w100"></label>
@@ -78,6 +78,9 @@
             return false;
         } else if (data.formData.missionName.length > 20) {
             data.eMsg.missionName = "任务名不得大于20个字符";
+            return false;
+        } else if (data.formData.startDate > data.formData.endDate) {
+            alert("开始日期大于结束日期");
             return false;
         } else {
             data.eMsg.missionName = false;

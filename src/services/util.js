@@ -34,6 +34,83 @@ class Util {
         }
         return ret;
     }
+
+    // 解码图表的时间，转化为H的小时表示
+    // 格式 12 H
+    // 或 12 M
+    // 或 12 S
+    static decodeTime(timeStr) {
+        // console.log(timeStr);
+        let hour, minute, seconds;
+        let unit = timeStr[timeStr.length - 1];
+        let num = timeStr.substr(0, timeStr.length - 2) - 0;
+        // console.log(num);
+        switch (unit) {
+            case 'H':
+                return num * 3600;
+            case 'M':
+                return num * 60;
+            case 'S':
+                return num;
+            default:
+        }
+    }
+
+    // 解析为分钟数
+    static decodeTimeByMinute(timeStr) {
+        // console.log(timeStr);
+        let hour, minute, seconds;
+        let unit = timeStr[timeStr.length - 1];
+        let num = timeStr.substr(0, timeStr.length - 2) - 0;
+        // console.log(num);
+        switch (unit) {
+            case 'H':
+                return num * 60;
+            case 'M':
+                return num;
+            case 'S':
+                return num / 60;
+            default:
+        }
+    }
+
+    // 将日期数组转化为二维坐标
+    static decodeCordinateArrayOfDate(dataArray, todayX) {
+        console.log("获取Cordinate坐标中...");
+        // 获得今天 00:00:00
+        let today = new Date();
+        today.setHours(0);
+        today.setMinutes(0);
+        today.setSeconds(0);
+        today.setMilliseconds(0);
+        // 今天的坐标
+        let today_Y = 6 - today.getDay();
+        let today_X = todayX | 20;
+        let ret = [];
+        for (let i = 0; i < dataArray.length; i++) {
+            let dateStr = dataArray[i].name;
+            let arr = dateStr.split("-");
+            let theday = new Date(arr[0], arr[1] - 1, arr[2], 0, 0, 0);
+
+            // 获取天数差
+            let daySpan = (today.getTime() - theday.getTime()) / (24 * 60 * 60 * 1000);
+            let detX = Math.floor((daySpan + today_Y) / 7);
+            let detY = (daySpan + today_Y) % 7;
+
+            let x = today_X - detX - 1;
+            let y = detY;
+
+            ret.push({
+                value: [x, y, dataArray[i].value],
+                label: {
+                    time: dataArray[i].time,
+                    name: dataArray[i].name
+                }
+            });
+        }
+        // console.log(ret);
+        return ret;
+    }
 }
 
 export default Util

@@ -2,8 +2,8 @@
 	<div>
     	<myheader page="2"></myheader>
     	<mycontent :mID="$route.params.id"></mycontent>
-    	<myjoin></myjoin>
-    	<mycomment></mycomment>
+    	<myjoin :mID="$route.params.id"></myjoin>
+    	<mycomment :mID="$route.params.id"></mycomment>
   	</div>
 </template>
 

@@ -36,7 +36,7 @@
 					<a href="mission.html" class="item" :class="{'active':page == 2}">任务</a>
 					<a href="solution.html" class="item" :class="{'active':page == 3}">方案</a>
 					<div class="right menu">
-						<a href="/singlePeople" id="username" class="item button" v-bind:class="{'noLogin':noLogin}">{{ username }}</a>
+						<a :href="peronalPageUrl" id="username" class="item button" v-bind:class="{'noLogin':noLogin}">{{ username }}</a>
 						<a id="quitLogin" class="item button" v-bind:class="{'noLogin':noLogin}" @click="quitUser">离开</a>
                         <a href="user.html#/login" class="loginButton item button" v-bind:class="{'noLogin':noLogin}">登录</a>
 						<a href="user.html#/register" class="loginButton item button" v-bind:class="{'noLogin':noLogin}">注册</a>
@@ -56,6 +56,7 @@
 
     let data = {
             username: user.username,
+            peronalPageUrl: 'user.html#/myinfo/' + user.id,
             noLogin: false
         }
         // 是否登录

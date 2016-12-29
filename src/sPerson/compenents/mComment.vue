@@ -1,7 +1,7 @@
-<style lang="less" scoped>
-    .animation {
-        transition: all 1.5s;
-        opacity: 1;
+export default {
+    url: "http://10.10.10.2:8080/CcodeRMS/" //本地测试url
+        // url: "http://112.74.177.217:8080/CcodeRMS/" //阿里云测试url
+}       opacity: 1;
     }
     
     .hideCard {
@@ -43,19 +43,25 @@
 
 <script>
     import scroll from '../../services/scrollUtil.js'
+    import person from '../../services/person.js'
 
     let data = {
         hideCard: true,
-        comments: [{
-            avatarUrl: 'resource/cute.jpg',
-            name: '十三三长得高',
-            time: '2016/5/5 12:00',
-            content: '话说研究如何在前端偷懒是一件非常有意义的事情'
-        }],
+        comments: [],
         replyContent: ''
     }
 
+    function getComment(id) {
+        person.getComments(id).then((res) => {
+            // 获取评论成功
+            data.comments = res;
+        }, () => {
+            // 失败
+        })
+    }
+
     export default {
+        props: ['mID'],
         mounted() {
             let self = this
             scroll.scrollToDOMShow(this.$el, () => {
@@ -63,6 +69,7 @@
                     self.hideCard = false;
                 }, 100);
             });
+            getComment(this.mID);
         },
         data() {
             return data;
@@ -72,7 +79,15 @@
                 if (data.replyContent == '') {
                     alert("评论不得为空");
                 } else {
-                    //TODO 评论不为空的情况
+                    let self = this;
+                    person.addComments(self.mID, self.replyContent).then(() => {
+                        // 添加评论成功
+                        // 重新加载评论
+                        data.replyContent='';
+                        getComment(self.mID);
+                    }, () => {
+                        // 添加失败
+                    });
                 }
             }
         }

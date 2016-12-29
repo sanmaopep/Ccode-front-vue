@@ -43,19 +43,25 @@
 
 <script>
     import scroll from '../../services/scrollUtil.js'
+    import solution from '../../services/solution.js'
 
     let data = {
         hideCard: true,
-        comments: [{
-            avatarUrl: 'resource/cute.jpg',
-            name: '十三三长得高',
-            time: '2016/5/5 12:00',
-            content: '话说研究如何在前端偷懒是一件非常有意义的事情'
-        }],
+        comments: [],
         replyContent: ''
     }
 
+    function getComment(id) {
+        solution.getComments(id).then((res) => {
+            // 获取评论成功
+            data.comments = res;
+        }, () => {
+            // 失败
+        })
+    }
+
     export default {
+        props: ['mID'],
         mounted() {
             let self = this
             scroll.scrollToDOMShow(this.$el, () => {
@@ -63,6 +69,7 @@
                     self.hideCard = false;
                 }, 100);
             });
+            getComment(this.mID);
         },
         data() {
             return data;
@@ -72,7 +79,15 @@
                 if (data.replyContent == '') {
                     alert("评论不得为空");
                 } else {
-                    //TODO 评论不为空的情况
+                    let self = this;
+                    solution.addComments(self.mID, self.replyContent).then(() => {
+                        // 添加评论成功
+                        // 重新加载评论
+                        data.replyContent = '';
+                        getComment(self.mID);
+                    }, () => {
+                        // 添加失败
+                    });
                 }
             }
         }

@@ -42,7 +42,7 @@
 					<textarea cols="30" rows="10" v-model="formData.content"></textarea>
 				</div>
       			<div class="field">
-					<button class="ui fluid button" type="submit">提交</button>
+					<button class="ui fluid button" type="submit" @click="submitForm">提交</button>
       			</div>
       			<div class="ui error message w500" style="margin-left: 100px;"></div>	
 			</div>
@@ -51,72 +51,71 @@
 </template>
 
 <script>
-	/*
-		接口：
-		1. get avatarURL by token
-		2. upload info(file === '' when no new avatar upload)
-		3. get curr userInfo
-	 */
-	
-	let data = {
-		imageSrc:'resource/rabit.jpg',
-		formData:{
-			file:'',
-			content:'',
-			className:'全部',
-			location:'全部',
-			school:'其它'
-		},
-		className:[
-			'全部',
-			'平面设计',
-			'前端开发',
-			'UI设计',
-			'移动开发',
-			'后端开发'
-		],
-		location:[
-			'全部',
-			'杭州',
-			'温州'
-		],
-		school:[
-			'浙江工业大学',
-			'温州大学',
-			'杭州电子科技大学',
-			'其它'
-		]
-	};
+    import User from '../../services/user.js'
+
+    let data = {
+        imageSrc: 'resource/rabit.jpg',
+        formData: {
+            file: '',
+            content: '啦啦啦',
+            className: '前端开发',
+            location: '杭州',
+            school: '浙江工业大学'
+        },
+        className: [
+            '全部',
+            '平面设计',
+            '前端开发',
+            'UI设计',
+            '移动开发',
+            '后端开发'
+        ],
+        location: [
+            '全部',
+            '杭州',
+            '温州'
+        ],
+        school: [
+            '浙江工业大学',
+            '温州大学',
+            '杭州电子科技大学',
+            '其它'
+        ]
+    };
 
 
 
-	export default {
-		data() {
-			return data;
-		},
-		methods: {
-			submitForm() {
-				
-			},
-			addPic(){
-				var pic=document.getElementById('pic');
-				pic.click();
-				return ;
-			},
-			preImg(sourceId) {  
-			    if (typeof FileReader === 'undefined') {  
-			        alert('浏览器等级低于IE9，无法进行头像处理');  
-			        return;  
-			    }  
-			    var reader = new FileReader();  
-			  
-			    reader.onload = function(e) { 
-			    	//set Image Src here
-			        data.imageSrc = this.result;  
-			    }  
-			    data.formData.file = document.getElementById(sourceId).files[0];
-			    reader.readAsDataURL(data.formData.file); 
-			}
-		}
-	}
+    export default {
+        data() {
+            return data;
+        },
+        methods: {
+            submitForm() {
+                User.editInformation(data.formData).then(() => {
+                    // 编辑成功
+                }, () => {
+                    // 编辑失败
+                });
+            },
+            addPic() {
+                var pic = document.getElementById('pic');
+                pic.click();
+                return;
+            },
+            preImg(sourceId) {
+                if (typeof FileReader === 'undefined') {
+                    alert('浏览器等级低于IE9，无法进行头像处理');
+                    return;
+                }
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    //set Image Src here
+                    data.imageSrc = this.result;
+                }
+                data.formData.file = document.getElementById(sourceId).files[0];
+                reader.readAsDataURL(data.formData.file);
+            }
+        }
+    }
 </script>

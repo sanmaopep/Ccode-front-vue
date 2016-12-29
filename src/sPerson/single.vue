@@ -2,8 +2,9 @@
 	<div>
     	<myheader page="1"></myheader>
     	<mycontent :mID="$route.params.id"></mycontent>
-    	<solutions></solutions>
-    	<mycomment></mycomment>
+    	<solutions :mID="$route.params.id"></solutions>
+        <mytime :mID="$route.params.id"></mytime>
+    	<mycomment :mID="$route.params.id"></mycomment>
   	</div>
 </template>
 
@@ -12,6 +13,7 @@
     import mycontent from './compenents/mContent.vue'
     import solutions from './compenents/solutions.vue'
     import mycomment from './compenents/mComment.vue'
+    import mytime from './compenents/assessmentTime.vue'
 
     export default {
         data() {
@@ -21,7 +23,8 @@
             myheader,
             mycontent,
             solutions,
-            mycomment
+            mycomment,
+            mytime
         }
     }
 </script>
