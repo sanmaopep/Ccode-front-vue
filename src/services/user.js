@@ -135,7 +135,7 @@ class User {
                         // alert("登录成功");
                         // 存储当前用户信息
                         let user = new User(username, data.userid, data.token);
-                        user.storeUser(false);
+                        user.storeUser(true);
                         Util.changeView('/');
                         resolve();
                     } else {
@@ -196,61 +196,8 @@ class User {
      * @memberOf User
      */
     static editInformation(data) {
-        return new Promise((resolve, reject) => {
-            var formData = new FormData();
-            for (let key in data) {
-                formData.append(key, data[key]);
-            }
-            // 如果没有文件，上传一个空文件
-            if (data['file'] == '') {
-                console.log("没有头像");
-                formData.delete('file');
-                let file = new File([], '');
-                formData.append('file', file);
-            }
-
-            let url = config.url + 'apptalents/modifyInfo';
-
-            let xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4) {
-                    if (xhr.status == 200) {
-                        let data = JSON.parse(xhr.responseText);
-                        console.log(data);
-                        alert(data.msg);
-                        if (data.code == "T") {
-                            // 回到首页
-                        }
-                    } else {
-                        alert("修改个人信息失败，请检查网络");
-                        reject();
-                    }
-                }
-            }
-            xhr.open('POST', url);
-            xhr.send(formData);
-
-
-            // $.ajax({
-            //     type: "POST",
-            //     url: url,
-            //     data: formData,
-            //     contentType: false,
-            //     processData: false,
-            //     success: (data) => {
-            //         alert("获取成功");
-            //         console.log(data);
-            //         resolve();
-            //     },
-            //     error: () => {
-            //         alert("更改个人信息失败");
-            //         reject();
-            //     }
-            // });
-        });
+        return new Promise((resolve, reject) => {});
     }
-
-    static getRole() {}
 }
 
 export default User

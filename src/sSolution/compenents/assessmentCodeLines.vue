@@ -6,19 +6,19 @@
             <div class="ui four statistics">
                 <div class="statistic">
                     <div class="label">代码总量</div>
-                    <div class="value" style="font-size: 3rem;">{{ all }}</div>
+                    <div class="value" style="font-size: 3rem;">{{ report.all }}</div>
                 </div>
                 <div class="statistic">
                     <div class="label">注释量</div>
-                    <div class="value" style="font-size: 3rem;">{{ comment }}</div>
+                    <div class="value" style="font-size: 3rem;">{{ report.comment }}</div>
                 </div>
                 <div class="statistic">
                     <div class="label">空行总数</div>
-                    <div class="value" style="font-size: 3rem;">{{ empty }}</div>
+                    <div class="value" style="font-size: 3rem;">{{ report.empty }}</div>
                 </div>
                 <div class="statistic">
                     <div class="label">实际代码量</div>
-                    <div class="value" style="font-size: 3rem;">{{ real }}</div>
+                    <div class="value" style="font-size: 3rem;">{{ report.real }}</div>
                 </div>
             </div>
         </div>
@@ -26,14 +26,9 @@
 </template>
 <script>
     export default {
-        props: ['mID'],
+        props: ['mID', 'report'],
         data() {
-            return {
-                all:1234,
-                comment:123,
-                empty:500,
-                real:1234
-            };
+            return {};
         }
     }
 </script>

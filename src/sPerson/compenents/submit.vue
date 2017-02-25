@@ -1,10 +1,17 @@
+<style scoped>
+    #changeInfoAvatar {
+        height: 300px;
+    }
+</style>
+
+
 <template>
 	<section class="ui container mt20">
 		<div class="ui segment">
 			<h1 class="ui header normal-fw"><span class="titleSquare"></span>用户信息编辑</h1>
 			<div class="ui divider"></div>
 			<div class="tac" style="margin-bottom: 20px;">
-				<img :src="imageSrc" class="ui centered medium circular image"/>
+				<img :src="imageSrc" id="changeInfoAvatar" class="ui centered medium circular image"/>
 				<h2 class="ui header normal-fw">十三三长得高</h2>
 				<a @click="addPic" class="ui button tac w500">上传新头像</a>
 				<!--图片上传input隐藏-->
@@ -52,11 +59,14 @@
 
 <script>
     import User from '../../services/user.js'
+    import Person from '../../services/person.js'
+    import Util from '../../services/util.js'
 
     let data = {
         imageSrc: 'resource/rabit.jpg',
         formData: {
             file: '',
+            id: User.getUser().id,
             content: '啦啦啦',
             className: '前端开发',
             location: '杭州',
@@ -83,7 +93,12 @@
         ]
     };
 
-
+    //获取头像
+    Person.getContent(data.formData.id).then((res) => {
+        data.imageSrc = res.avatarUrl;
+    }, (msg) => {
+        // alert(msg);
+    });
 
     export default {
         data() {
@@ -93,6 +108,7 @@
             submitForm() {
                 User.editInformation(data.formData).then(() => {
                     // 编辑成功
+                    Util.changeView("/");
                 }, () => {
                     // 编辑失败
                 });

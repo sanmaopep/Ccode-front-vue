@@ -6,17 +6,16 @@
 </template>
 
 <script>
-import myheader from '../compenents/header.vue'
-import mylist from './compenents/list.vue'
+    import myheader from '../compenents/header.vue'
+    import mylist from './compenents/list.vue'
 
-export default {
-  data(){
-    return {
+    export default {
+        data() {
+            return {}
+        },
+        components: {
+            myheader,
+            mylist
+        }
     }
-  },
-  components: {
-    myheader,
-    mylist
-  }
-}
 </script>

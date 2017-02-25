@@ -3,8 +3,8 @@
 		<myheader page="3"></myheader>
 		<mycontent :mID="$route.params.id" @getuser="knowUser"></mycontent>
         <git :mID="$route.params.id" :isCurrUser="isCurrUser"></git>
-        <codelines :mID="$route.params.id"></codelines>
-        <similarity :mID="$route.params.id"></similarity>
+        <codelines :mID="$route.params.id" :report="queryResult"></codelines>
+        <similarity :mID="$route.params.id" :report="queryResult"></similarity>
 		<mycomment :mID="$route.params.id"></mycomment>
 	</div>
 </template>
@@ -17,10 +17,13 @@
     import codelines from './compenents/assessmentCodeLines.vue'
     import User from '../services/user.js'
 
+    import assessment from '../services/assessment.js'
+
     export default {
         data() {
             return {
-                isCurrUser: false
+                isCurrUser: false,
+                queryResult: {}
             }
         },
         components: {
@@ -38,6 +41,16 @@
                 console.log(username);
                 this.isCurrUser = (username == User.getUser().username);
             }
+        },
+        mounted() {
+            let id = this.$route.params.id;
+            let self = this;
+            assessment.getCodeQueryResult(id).then((res) => {
+                // 成功
+                self.queryResult = res;
+            }, (msg) => {
+                // 失败
+            })
         }
     }
 </script>

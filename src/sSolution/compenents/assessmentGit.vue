@@ -7,7 +7,7 @@
                 <div class="item">
                     <div class="content">
                         <div class="header">{{ gitInfo.info }} - {{ gitInfo.description }}</div>
-                        <div class="description">{{ gitInfo.url }} (上次Clone：{{gitInfo.lastClone}})</div>
+                        <div class="description">{{ gitInfo.url }}</div>
                     </div>
                 </div>
             </div>
@@ -24,11 +24,11 @@
                         <div class="ui form">
                             <div class="inline field">
                                 <label class="w100">仓库说明</label>
-                                <input type="text" class="w500" v-model="formData.gitDescription"/>
+                                <input type="text" class="w500" v-model="formData.gitDescription" />
                             </div>
                             <div class="inline field">
                                 <label class="w100">Git地址</label>
-                                <input type="text" class="w500" v-model="formData.gitUrl"/>
+                                <input type="text" class="w500" v-model="formData.gitUrl" />
                             </div>
                             <div class="inline field">
                                 <label class="w100">用户名</label>
@@ -36,7 +36,7 @@
                             </div>
                             <div class="inline field">
                                 <label class="w100">密码</label>
-                                <input type="password" class="w500" v-model="formData.gitPassword"/>
+                                <input type="password" class="w500" v-model="formData.gitPassword" />
                             </div>
                             <div class="inline field">
                                 <label class="w100"></label>
@@ -46,17 +46,9 @@
                     </div>
                 </div>
             </div>
-            <div class="ui one column grid">
-                <div class="column">
-                    <a class="ui fluid button">下载源代码</a>
-                </div>
-            </div>
-             
-            
         </div>
     </section>
 </template>
-
 <script>
     import assessment from '../../services/assessment.js'
     import User from '../../services/user.js'
@@ -89,7 +81,7 @@
             // 每隔10s检查一次clone状态
             setInterval(() => {
                 self.loadGitInfo();
-            }, 10 * 1000);
+            }, 2 * 1000);
         },
         methods: {
             // 提交Git信息

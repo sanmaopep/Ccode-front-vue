@@ -29,7 +29,7 @@
 			</div>
 			<div class="ui message clearfix">
 				<a class="fl" href="#/register">注册</a>   
-				<a class="fr" href="#/forgetPassword">忘记密码</a>
+				<a class="fr" href="#/forget">忘记密码</a>
 			</div>
 		</div>
 	</div>

@@ -5,7 +5,7 @@
 <template>
 <section class="ui container mt20">
 	<div class="ui segment">
-		<h1 class="ui header normal-fw"><span class="titleSquare"></span>新用户注册</h1>
+		<h1 class="ui header normal-fw"><span class="titleSquare"></span>忘记密码</h1>
 		<div class="ui divider"></div>
 		<div class="ui form" style="padding-left: 50px;" id="registerForm">
 			<div class="inline field" :class="{error : eMsg.username}">
@@ -13,14 +13,7 @@
 				<input class="w500" type="text" v-model="formData.username">
 				<span v-if="eMsg.username" class="eMsg">{{ eMsg.username }}</span>
 			</div>
-			<div class="inline field">
-					<label class="normal-fw fz16 w100">任务类别</label>
-					<select class="ui fluid dropdown w500" v-model="formData.role">
-						<option v-for="option in roleList" :value="option.value">
-							{{ option.name }}
-						</option>
-					</select>
-				</div>
+
 			<div class="inline field" :class="{error : eMsg.phone}">
 				<label class="normal-fw fz16 w100">手机</label>
 				<input style="width: 350px;" v-model="formData.phone">
@@ -52,7 +45,6 @@
   						<a href="#">Ccode服务条款</a>
 						<span v-if="eMsg.agreeCcode" class="eMsg">{{ eMsg.agreeCcode }}</span>
   					</label>
-  					
 				</div>
   			</div>
   			<div class="inline field">
@@ -72,21 +64,9 @@
     let data = {
         vertifyContent: "获取验证码",
         vertifySuccess: false,
-        roleList: [{
-            name: "开发",
-            value: "DEVELOPER"
-        }, {
-            name: "企业",
-            value: "ENTERPRISE"
-        }, {
-            name: "教师",
-            value: "REVIEWER"
-        }],
         formData: {
             username: "sanmaopep1",
             password: "123456",
-            // role has:'DEVELOPER','ENTERPRISE','REVIER'
-            role: "DEVELOPER",
             againPassword: "123456",
             phone: "17816876927",
             vertifyNum: "",
@@ -125,7 +105,7 @@
                         }
                     }, 1000);
                 }, (message) => {
-                    // alert(message);
+                    alert(message);
                 });
             }
         },
@@ -135,7 +115,7 @@
             if (vertifyForm()) {
                 // alert("注册成功");
                 //点击提交事件
-                let template = ["username", "password", "phone", "vertifyNum", "role"];
+                let template = ["username", "password", "phone", "vertifyNum"];
                 MyUser.register(Util.getSubObject(data.formData, template)).then(() => {
                     // 注册成功
                 }, (message) => {

@@ -37,7 +37,6 @@ class assessment {
             data["id"] = solutionId - 0;
             $.post(url, data,
                 function(data, textStatus, jqXHR) {
-                    console.log(data);
                     if (data.code === "T") {
                         resolve(data.data);
                     } else {
@@ -59,19 +58,45 @@ class assessment {
             let url = config.url + "appsolution/gitClone";
             let data = {};
             data["id"] = solutionId - 0;
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: data,
-                dataType: "json",
-                async: true,
-                success: function(response) {},
-                error: function() {
-                    alert("请求Clone失败，请检查网络");
-                    reject();
-                }
+            $.post(url, data,
+                function(data, textStatus, jqXHR) {
+                    console.log(data);
+                    if (data.code === "T") {
+                        resolve(data.data);
+                    } else {
+                        alert(data.msg);
+                        reject();
+                    }
+                },
+                "json"
+            ).error(() => {
+                alert("Git Clone请求失败");
+                reject();
             });
-            resolve();
+        });
+    }
+
+    // 获取代码分析结果
+    static getCodeQueryResult(solutionId) {
+        return new Promise((resolve, reject) => {
+            let url = config.url + "appsolution/queryCode";
+            let data = {};
+            data["id"] = solutionId - 0;
+            $.post(url, data,
+                function(data, textStatus, jqXHR) {
+                    console.log(data);
+                    if (data.code === "T") {
+                        resolve(data.data);
+                    } else {
+                        alert(data.msg);
+                        reject();
+                    }
+                },
+                "json"
+            ).error(() => {
+                alert("查询结果失败");
+                reject();
+            });
         });
     }
 

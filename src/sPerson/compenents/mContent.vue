@@ -37,21 +37,23 @@
 				</div>
 			</div>
 		</div>
-		<a href="#" class="ui button fluid">修改资料</a>
+		<a href="user.html#/changeInfo" class="ui button fluid" v-if="mID == yourId">修改资料</a>
 	</section>
 </template>
 
 <script>
     import person from '../../services/person'
+    import User from '../../services/user.js'
 
     let data = {
         hideCard: true,
         avatarUrl: 'resource/rabit.jpg',
-        location: '杭州',
-        school: '浙江工业大学',
+        location: 'HZ',
+        school: 'ZJUT',
         className: '前端开发',
-        name: '毛怡伟',
-        content: '“souyoo，搜游网创造者”，“寓教”品牌缔造者，连续创业者，2015硬件创新奖十强、2015hight客创业硬件件创新奖获得者1999年创办www.souyoo.com搜游网，任CEO 2002～2011年，上海睿网电子有限公司www.rueinet.com，任总经理；'
+        name: 'Jack',
+        content: '',
+        yourId: User.getUser().id
     }
 
     //获取人才内容

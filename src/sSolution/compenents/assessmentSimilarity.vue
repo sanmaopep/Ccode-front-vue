@@ -5,14 +5,14 @@
             <div class="ui divider"></div>
             <div class="ui list">
                 <!-- 一个相似度 -->
-                <div class="item" v-for="(item,index) in simiList">
+                <div class="item" v-for="(item,index) in report.similarity">
                     <img class="ui avatar image" :src="item.avatarUrl">
                     <div class="content">
                         <div class="header">{{ item.solutionName }}</div>
-                        <div class="description">两者存在相似</div>
+                        <div class="description">git地址: {{ item.gitUrl }}</div>
                     </div>
                     <div class="right floated content">
-                        <a class="ui button" :href="item.solutionUrl">详细</a>
+                        <div class="ui button" @click="changeSolution(item.id)">详细</div>
                     </div>
                 </div>
                 <!-- /一个相似度 -->
@@ -21,17 +21,18 @@
     </section>
 </template>
 <script>
-    export default {
-        props: ['mID'],
-        data() {
-            return {
-                simiList: [{
-                    solutionName: '如何在做前端的时候偷懒',
-                    solutionUrl: '',
-                    avatarUrl: '/resource/rabit.jpg'
-                }]
+    import Util from '../../services/util.js'
 
-            };
+    export default {
+        props: ['mID', 'report'],
+        data() {
+            return {};
+        },
+        methods: {
+            changeSolution(id) {
+                Util.changeView("#/single/" + id);
+                window.location.reload();
+            }
         }
     }
 </script>

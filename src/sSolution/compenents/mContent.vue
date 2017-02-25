@@ -11,26 +11,23 @@
         opacity: 0;
     }
 </style>
-
 <template>
-	<section class="ui container animation" style="margin-top: 20px;">
-		<div class="ui segment">
-			<h1 class="ui header normal-fw"><span class="titleSquare"></span>{{ title }}</h1>
-			<div class="ui divider" style="margin-bottom: 0px;"></div>
-			<div class="row" style="margin-bottom: 20px;">
-				<p class="sub-info">
-					发布于 {{ publishTime }}
-					<span class="ml50">{{ className }}</span>
-					<span class="fr">发布者 : {{ writer }}</span>
-				</p>
-			</div>
-			<div id="missionContent" v-html="content">
-			</div>
-		</div>
-		<a href="#" class="ui fluid button">了解发布者</a>
-	</section>
+    <section class="ui container animation" style="margin-top: 20px;">
+        <div class="ui segment">
+            <h1 class="ui header normal-fw"><span class="titleSquare"></span>{{ title }}</h1>
+            <div class="ui divider" style="margin-bottom: 0px;"></div>
+            <div class="row" style="margin-bottom: 20px;">
+                <p class="sub-info">
+                    发布于 {{ publishTime }}
+                    <span class="ml50">{{ className }}</span>
+                    <span class="fr">发布者 : {{ writer }}</span>
+                </p>
+            </div>
+            <div id="missionContent" v-html="content">
+            </div>
+        </div>
+    </section>
 </template>
-
 <script>
     import solution from '../../services/solution.js'
 
