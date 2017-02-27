@@ -61,10 +61,10 @@
                 cloneBtnInfo: 'Clone你的代码',
                 disableToClickClone: false,
                 gitInfo: {
-                    url: "https://git.oschina.net/sanmaopep",
-                    description: '1234',
-                    lastClone: "2016/6/9-12:00:00",
-                    info: '正在Clone',
+                    url: "Nothing",
+                    description: "",
+                    lastClone: "",
+                    info: "",
                     cloning: 0
                 },
                 formData: {
@@ -90,6 +90,7 @@
                 let template = ["gitDescription", "gitUrl", "gitUsername", "gitPassword"];
                 assessment.addGit(self.mID, Util.getSubObject(self.formData, template)).then(() => {
                     // 添加成功
+                    window.location.reload(true);
                 }, () => {
                     // 添加失败
                 });

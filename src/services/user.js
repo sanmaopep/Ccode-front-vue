@@ -67,23 +67,7 @@ class User {
      ** 接口分割线 ************************************************
      **************************************************************/
 
-    /**
-     * register 注册
-     * POST PARAMS:
-     * username:"sanmaopep",
-     * password:"513513mzq",
-     * phone:"17816876927",
-     * vertifyNum:"1234"
-     * RET: {
-     * 	code:'F',
-     * 	msg:'验证码不正确'	
-     * } or {
-     * 	code:'T',
-     * 	msg:'注册成功',
-     * 	userid:'123',
-     * 	token:'SAFASDV1231456FADFASF123'
-     * }
-     */
+
     static register(data) {
         return new Promise((resolve, reject) => {
             let url = config.url + "appsystem/register";
@@ -110,21 +94,7 @@ class User {
         });
     }
 
-    /**
-     * login 登录
-     * POST PARAMS：
-     * username:"sanmaopep"
-     * password:"513513mzq"
-     * RET: {
-     * 	code:'F',
-     * 	msg:'密码错误'	
-     * } or {
-     * 	code:'T',
-     * 	msg:'登录成功',
-     * 	userid:'123',
-     * 	token:'SAFASDV1231456FADFASF123'
-     * }
-     */
+
     static login(data) {
         return new Promise((resolve, reject) => {
             let url = config.url + "appsystem/sys_login";
@@ -151,52 +121,63 @@ class User {
         });
     }
 
-    /**
-     * 获取手机验证码
-     * POST PARAMS:
-     * phoneNum:"17816876927"
-     * RET: {
-     * 	code:'F',
-     * 	msg:'获取验证码错误'	
-     * } or {
-     * 	code:'T',
-     * 	msg:'获取验证码成功',
-     * }
-     */
+
     static requestPhoneVertify(phoneNum) {
         return new Promise((resolve, reject) => {
-            let ret = {};
-            // 成功：
-            resolve();
-            // 失败：
-            reject(ret.msg);
+            let url = config.url + "appsystem/getPhoneCode";
+            let data = {};
+            data["phoneNum"] = phoneNum;
+            $.post(url, data,
+                function(data, textStatus, jqXHR) {
+                    if (data.code === "T") {
+                        resolve();
+                    } else {
+                        alert(data.msg);
+                        reject();
+                    }
+                },
+                "json"
+            ).error(() => {
+                reject();
+                alert("获取验证码失败，请检查网络问题");
+            });
         });
     }
 
-    /**
-     * 编辑用户个人信息
-     * 
-     * POST PRAMAS:
-     * token:'fdsafasfsaf'
-     * file:图片文件,
-     * content:'啦啦啦啦啦',
-     * className:'移动开发',
-     * location:'杭州',
-     * school:'浙江工业大学'
-     * RET:{
-     *  code:"T",
-     *  msg:'修改失败'
-     *  } or {
-     *   code:'F',
-     *   msg:'修改失败'
-     *  }
-     * @static
-     * @param {any} data
-     * 
-     * @memberOf User
-     */
     static editInformation(data) {
-        return new Promise((resolve, reject) => {});
+        return new Promise((resolve, reject) => {
+            let myForm = new FormData();
+            for (let key in data) {
+                myForm.append(key, data[key]);
+            }
+            if (data['file'] == '') {
+                console.log("没有头像");
+                myForm.delete("file");
+                let file = new File([], '');
+                myForm.append('file', file);
+            }
+            let xhr = new XMLHttpRequest();
+            let url = config.url + "apptalents/modifyInfo";
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        let data = JSON.parse(xhr.responseText);
+                        if (data.code == "T") {
+                            resolve();
+                        } else {
+                            alert(data.msg);
+                            reject();
+                        }
+                    } else {
+                        alert("获取数据失败,请检查网络");
+                        reject();
+                    }
+                }
+            }
+            xhr.open("POST", url);
+            xhr.send(myForm);
+
+        });
     }
 }
 
