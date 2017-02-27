@@ -148,13 +148,16 @@ class User {
         return new Promise((resolve, reject) => {
             let myForm = new FormData();
             for (let key in data) {
-                myForm.append(key, data[key]);
-            }
-            if (data['file'] == '') {
-                console.log("没有头像");
-                myForm.delete("file");
-                let file = new File([], '');
-                myForm.append('file', file);
+                if (key == "file") {
+                    if (data['file'] == '') {
+                        let file = new File([], '');
+                        myForm.append('file', file);
+                    } else {
+                        myForm.append(key, data[key]);
+                    }
+                } else {
+                    myForm.append(key, data[key]);
+                }
             }
             let xhr = new XMLHttpRequest();
             let url = config.url + "apptalents/modifyInfo";
@@ -176,7 +179,7 @@ class User {
             }
             xhr.open("POST", url);
             xhr.send(myForm);
-
+            console.log(myForm);
         });
     }
 }

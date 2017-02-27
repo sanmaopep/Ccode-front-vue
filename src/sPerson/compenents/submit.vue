@@ -128,7 +128,7 @@
             submitForm() {
                 User.editInformation(data.formData).then(() => {
                     // 编辑成功
-                    // Util.changeView("/");
+                    Util.changeView("/");
                 }, () => {
                     // 编辑失败
                 });
