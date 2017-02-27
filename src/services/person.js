@@ -100,6 +100,7 @@ class Person {
             $.post(url, data,
                 function(data, textStatus, jqXHR) {
                     if (data.code === "T") {
+                        data.data['avatarUrl'] = Util.changeAvatarUrl(data.data['avatarUrl']);
                         resolve(data.data);
                     } else {
                         alert(data.msg);

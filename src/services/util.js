@@ -11,6 +11,14 @@ class Util {
         window.location.href = url;
     }
 
+    static changeAvatarUrl(url) {
+        if (url != 'resource/cute.jpg') {
+            return config.url + url;
+        } else {
+            return url;
+        }
+    }
+
     /**
      * 验证这个是不是手机号码
      * @param  {[string]} phoneNum 验证对象
