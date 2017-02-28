@@ -1,15 +1,3 @@
-export default {
-    url: "http://10.10.10.2:8080/CcodeRMS/" //本地测试url
-        // url: "http://112.74.177.217:8080/CcodeRMS/" //阿里云测试url
-}       opacity: 1;
-    }
-    
-    .hideCard {
-        opacity: 0;
-    }
-</style>
-
-
 <template>
 	<section class="ui container animation" style="margin-top: 20px;">
 		<div class="ui segment">
@@ -83,7 +71,7 @@ export default {
                     person.addComments(self.mID, self.replyContent).then(() => {
                         // 添加评论成功
                         // 重新加载评论
-                        data.replyContent='';
+                        data.replyContent = '';
                         getComment(self.mID);
                     }, () => {
                         // 添加失败

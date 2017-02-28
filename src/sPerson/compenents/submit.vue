@@ -1,8 +1,3 @@
-<style scoped>
-    #changeInfoAvatar {
-        height: 300px;
-    }
-</style>
 <template>
     <section class="ui container mt20">
         <div class="ui segment">
@@ -128,7 +123,7 @@
             submitForm() {
                 User.editInformation(data.formData).then(() => {
                     // 编辑成功
-                    // Util.changeView("/");
+                    Util.changeView("/");
                 }, () => {
                     // 编辑失败
                 });

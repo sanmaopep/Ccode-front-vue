@@ -217,7 +217,7 @@
                     }
 
                     let chartData = Util.decodeCordinateArrayOfDate(self.lanHalfYearList, weekNum);
-                    chartData.unshift([30, 0, 0]);
+                    chartData.unshift([29, 0, 0]);
                     chartData.unshift([0, 0, 0]);
 
 

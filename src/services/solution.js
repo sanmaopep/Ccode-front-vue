@@ -96,6 +96,9 @@ class Solution {
                 function(data, textStatus, jqXHR) {
                     console.log(data);
                     if (data.code === "T") {
+                        for (let i = 0; i < data.data.length; i++) {
+                            data.data[i]['avatarUrl'] = Util.changeAvatarUrl(data.data[i]['avatarUrl']);
+                        }
                         resolve(data.data);
                     } else {
                         alert(data.msg);
@@ -187,6 +190,9 @@ class Solution {
                 function(data, textStatus, jqXHR) {
                     console.log(data);
                     if (data.code === "T") {
+                        for (let i = 0; i < data.data.length; i++) {
+                            data.data[i]['avatarUrl'] = Util.changeAvatarUrl(data.data[i]['avatarUrl']);
+                        }
                         resolve(data.data);
                     } else {
                         alert(data.msg);

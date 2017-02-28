@@ -116,11 +116,11 @@
                 // alert("注册成功");
                 //点击提交事件
                 let template = ["username", "password", "phone", "vertifyNum"];
-                MyUser.register(Util.getSubObject(data.formData, template)).then(() => {
-                    // 注册成功
+                MyUser.forgetPassword(Util.getSubObject(data.formData, template)).then(() => {
+                    //修改成功
+                    alert("修改密码成功");
                 }, (message) => {
-                    //TODO 注册失败
-                    // alert(message);
+                    // 修改密码失败
                 });
             }
         }

@@ -73,7 +73,7 @@ class User {
             let url = config.url + "appsystem/register";
             let username = data.username;
             $.post(url, data,
-                function(data, textStatus, jqXHR) {
+                function (data, textStatus, jqXHR) {
                     if (data.code === "T") {
                         // alert("注册成功");
                         // 存储当前用户信息
@@ -100,7 +100,7 @@ class User {
             let url = config.url + "appsystem/sys_login";
             let username = data.username;
             $.post(url, data,
-                function(data, textStatus, jqXHR) {
+                function (data, textStatus, jqXHR) {
                     if (data.code === "T") {
                         // alert("登录成功");
                         // 存储当前用户信息
@@ -128,7 +128,7 @@ class User {
             let data = {};
             data["phoneNum"] = phoneNum;
             $.post(url, data,
-                function(data, textStatus, jqXHR) {
+                function (data, textStatus, jqXHR) {
                     if (data.code === "T") {
                         resolve();
                     } else {
@@ -143,6 +143,27 @@ class User {
             });
         });
     }
+
+    static forgetPassword(data) {
+        return new Promise((resolve, reject) => {
+            let url = config.url + "appsystem/forget";
+            $.post(url, data,
+                function (data, textStatus, jqXHR) {
+                    if (data.code === "T") {
+                        resolve();
+                    } else {
+                        alert(data.msg);
+                        reject();
+                    }
+                },
+                "json"
+            ).error(() => {
+                reject();
+                alert("服务器维护中");
+            });
+        });
+    }
+
 
     static editInformation(data) {
         return new Promise((resolve, reject) => {
@@ -161,7 +182,7 @@ class User {
             }
             let xhr = new XMLHttpRequest();
             let url = config.url + "apptalents/modifyInfo";
-            xhr.onreadystatechange = function() {
+            xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {
                         let data = JSON.parse(xhr.responseText);
