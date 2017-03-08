@@ -1,22 +1,29 @@
-<template lang="jade">
-div
-  myheader(page="0")
-  slider
-  story
-  section.ui.clearing.container
-    .ui.divider
-    h2.ui.center.aligned.header 人才推荐
-    statistic
-    best-person
-  section.ui.clearing.container
-    .ui.divider
-    h2.ui.center.aligned.header 最新任务
-    mission-statistic
-    missions
+<template>
+    <div>
+        <Myheader page="0"></Myheader>
+        <slider></slider>
+        <story></story>
+        <section class="ui clearing container">
+            <div class="ui divider"></div>
+            <h2 class="ui center aligned header">人才推荐</h2>
+            <statistic></statistic>
+            <best-person></best-person>
+        </section>
+
+        <section class="ui clearing container">
+            <div class="ui divider"></div>
+            <h2 class="ui center aligned header">最新任务</h2>
+            <mission-statistic></mission-statistic>
+            <missions></missions>
+        </section>
+
+        <MyFooter></MyFooter>
+    </div>
 </template>
 
 <script>
     import Myheader from '../compenents/header.vue'
+    import MyFooter from '../compenents/footer.vue'
     import slider from './components/slider.vue'
     import story from './components/story.vue'
     import statistic from './components/statistic.vue'
@@ -27,6 +34,7 @@ div
     export default {
         components: {
             Myheader,
+            MyFooter,
             slider,
             story,
             statistic,
@@ -38,5 +46,4 @@ div
 </script>
 
 <style lang="less">
-
 </style>

@@ -6,10 +6,12 @@
         <codelines :mID="$route.params.id" :report="queryResult"></codelines>
         <similarity :mID="$route.params.id" :report="queryResult"></similarity>
         <mycomment :mID="$route.params.id"></mycomment>
+        <MyFooter></MyFooter>
     </div>
 </template>
 <script>
     import myheader from '../compenents/header.vue'
+    import MyFooter from '../compenents/footer.vue'
     import mycontent from './compenents/mContent.vue'
     import mycomment from './compenents/mComment.vue'
     import git from './compenents/assessmentGit.vue'
@@ -32,7 +34,8 @@
             mycomment,
             git,
             similarity,
-            codelines
+            codelines,
+            MyFooter
         },
         methods: {
             // 知道了Username是什么
@@ -54,5 +57,4 @@
             })
         }
     }
-
 </script>

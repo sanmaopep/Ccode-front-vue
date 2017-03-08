@@ -3,18 +3,15 @@
 		background-color: #DADADA;
 		height: 100%;
 	}
-
-
+	
 	#body .grid {
 		height: 100%;
 	}
-
-
+	
 	#body .image {
 		margin-top: -100px;
 	}
-
-
+	
 	#body .column {
 		max-width: 450px;
 	}
@@ -78,5 +75,4 @@
 		},
 		methods: methods
 	}
-
 </script>

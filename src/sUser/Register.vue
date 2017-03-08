@@ -6,22 +6,25 @@
 	<div>
 		<myheader page="4"></myheader>
 		<register></register>
+		<MyFooter></MyFooter>
 	</div>
 </template>
 
 <script>
-import myheader from '../compenents/header.vue'
-import register from './components/registerForm.vue'
+	import myheader from '../compenents/header.vue'
+	import MyFooter from '../compenents/footer.vue'
+	import register from './components/registerForm.vue'
 
-let mydata = {};
+	let mydata = {};
 
-export default {
-	data () {
-    	return mydata;
-  	},
-  	components:{
-  		myheader,
-  		register
-  	}
-}
+	export default {
+		data() {
+			return mydata;
+		},
+		components: {
+			myheader,
+			register,
+			MyFooter
+		}
+	}
 </script>

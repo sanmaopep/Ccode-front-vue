@@ -1,95 +1,48 @@
-<style scoped lang="less">
-    #username {
-        font-size: 20px;
+<style scoped>
+    footer {
+        margin-top: 30px;
+        padding: 50px;
+        border-top: 1px solid rgba(34, 36, 38, .15);
+        box-shadow: 0 -1px 2px 0 rgba(34, 36, 38, .15);
     }
     
-    #header .right.menu .item:hover {
-        border-color: white;
+    .links,
+    .company {
+        margin-top: 5px;
+        text-align: center;
     }
     
-    .ui.dropdown.item .menu {
-        top: 90%;
+    .company {
+        color: #BABABA;
     }
     
-    .ui.dropdown.item:hover .menu {
-        display: block;
-    }
-    
-    .loginButton.item.button {
-        font-size: 18px;
-        display: none;
-    }
-    
-    #username.noLogin,
-    #quitLogin.noLogin {
-        display: none;
-    }
-    
-    .loginButton.item.button.noLogin {
-        display: flex;
-    }
-    
-    #quitLogin {
-        font-size: 15px;
+    .links a {
+        color: #999;
+        display: inline-block;
+        width: 100px;
     }
 </style>
 
 <template>
-    <header id="header">
-        <div class="ui clearing segment">
-            <div class="ui clearing container">
-                <!-- 菜单栏 -->
-                <div class="ui secondary pointing menu" style="border-bottom: 0px;font-size: 20px;">
-                    <div class="ui floated small image">
-                        <img src="./assets/header-icon.png" height="381" width="1127" alt="Ccode">
-                    </div>
-                    <a href="/" class="item" :class="{'active':page == 0}">首页</a>
-                    <a href="person.html" class="item" :class="{'active':page == 1}">人才</a>
-                    <a href="mission.html" class="item" :class="{'active':page == 2}">任务</a>
-                    <a href="solution.html" class="item" :class="{'active':page == 3}">方案</a>
-                    <div class="right menu">
-                        <div class="ui dropdown item" v-show="!noLogin">
-                            {{ username }} <i class="dropdown icon"></i>
-                            <div class="menu">
-                                <a :href="peronalPageUrl" id="username" class="item button" v-bind:class="{'noLogin':noLogin}">个人页面</a>
-                                <a id="quitLogin" class="item button" v-bind:class="{'noLogin':noLogin}" @click="quitUser">退出登录</a>
-                            </div>
-                        </div>
-                        <a href="user.html#/login" class="loginButton item button" v-bind:class="{'noLogin':noLogin}">登录</a>
-                        <a href="user.html#/register" class="loginButton item button" v-bind:class="{'noLogin':noLogin}">注册</a>
-                    </div>
-                </div>
-            </div>
+    <footer>
+        <div class="links">
+            <a href="#">关于我们</a>
+            <a href="#">联系我们</a>
+            <a href="#">服务条款</a>
+            <a href="#">帮助中心</a>
+            <a href="#">功能日志</a>
         </div>
-    </header>
+        <div class="company">
+            浙江省大学生创业学院联盟 @ 杭州奇略网络科技有限公司
+        </div>
+    </footer>
 </template>
 
-
 <script>
-    import User from '../services/user'
-    import Util from '../services/util.js'
-
-    let user = User.getUser();
-    // console.log(user);
-
-    let data = {
-        username: user.username,
-        peronalPageUrl: 'user.html#/myinfo/' + user.id,
-        noLogin: false
-    }
-    // 是否登录
-    data.noLogin = (data.username === null || data.username === undefined);
-
     export default {
         props: ['page'],
         data() {
-            return data;
-        },
-        methods: {
-            quitUser() {
-                User.quitUser();
-                Util.changeView('/');
-            }
+            return {};
         }
     }
 </script>

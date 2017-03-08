@@ -4,11 +4,13 @@
         <mycontent :mID="$route.params.id"></mycontent>
         <myjoin :mID="$route.params.id"></myjoin>
         <mycomment :mID="$route.params.id"></mycomment>
+        <MyFooter></MyFooter>
     </div>
 </template>
 
 <script>
     import myheader from '../compenents/header.vue'
+    import MyFooter from '../compenents/footer.vue'
     import mycontent from './compenents/mContent.vue'
     import myjoin from './compenents/mJoinPerson.vue'
     import mycomment from './compenents/mComment.vue'
@@ -26,8 +28,8 @@
             myheader,
             mycontent,
             myjoin,
-            mycomment
+            mycomment,
+            MyFooter
         }
     }
-
 </script>

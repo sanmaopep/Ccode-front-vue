@@ -5,15 +5,18 @@
         <solutions :mID="$route.params.id"></solutions>
         <mytime :mID="$route.params.id"></mytime>
         <mycomment :mID="$route.params.id"></mycomment>
+        <myfooter></myfooter>
     </div>
 </template>
 
 <script>
     import myheader from '../compenents/header.vue'
+    import myfooter from '../compenents/footer.vue'
     import mycontent from './compenents/mContent.vue'
     import solutions from './compenents/solutions.vue'
     import mycomment from './compenents/mComment.vue'
     import mytime from './compenents/assessmentTime.vue'
+
 
     export default {
         data() {
@@ -27,8 +30,8 @@
             mycontent,
             solutions,
             mycomment,
-            mytime
+            mytime,
+            myfooter
         }
     }
-
 </script>
