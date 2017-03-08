@@ -1,8 +1,5 @@
 <style type="less" scoped>
-	.eMsg{
-		margin-left: 20px;
-		color: red;
-	}
+	.eMsg{ margin-left: 20px; color: red; }
 </style>
 
 <template>
@@ -14,17 +11,18 @@
 </template>
 
 <script>
-	export default{
-		props:['eMsg','value','label'],
-		data(){
+	export default {
+		props: ['eMsg', 'value', 'label'],
+		data() {
 			return {
 
 			}
 		},
-		methods:{
-			onInput(){
-				this.$emit("input",event.target.value)
+		methods: {
+			onInput() {
+				this.$emit("input", event.target.value)
 			}
 		}
 	}
+
 </script>

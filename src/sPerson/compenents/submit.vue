@@ -49,78 +49,42 @@
     import User from '../../services/user.js'
     import Person from '../../services/person.js'
     import Util from '../../services/util.js'
-    import constant from '../../services/constant.js'
-
-    let data = {
-        imageSrc: 'resource/rabit.jpg',
-        formData: {
-            file: '',
-            id: User.getUser().id,
-            content: '啦啦啦',
-            className: '',
-            location: '',
-            school: '浙江工业大学'
-        },
-        className: [{
-            name: "全部",
-            value: ""
-        }],
-        location: [{
-            name: "全部",
-            value: ""
-        }],
-        school: [
-            '浙江工业大学',
-            '温州大学',
-            '杭州电子科技大学',
-            '其它'
-        ]
-    };
-
-    // 获取class列表
-    constant.getClassNameList().then((classList) => {
-        // 获取成功
-        for (let i = 0; i < classList.length; i++) {
-            classList[i].value = classList[i].name;
-        }
-
-        classList.unshift({
-            name: "全部",
-            value: ''
-        });
-        data.className = classList;
-    }, () => {
-        // 获取失败
-    });
-
-    // 获取location列表
-    constant.getLocationList().then((areaList) => {
-        // 获取成功
-        for (let i = 0; i < areaList.length; i++) {
-            areaList[i].value = areaList[i].name;
-        }
-        areaList.unshift({
-            name: "全部",
-            value: ''
-        });
-        data.location = areaList;
-    }, () => {
-        // 获取失败
-    });
-
-    //获取头像
-    Person.getContent(data.formData.id).then((res) => {
-        data.imageSrc = res.avatarUrl;
-    }, (msg) => {
-        // alert(msg);
-    });
+    import constantStore from '../../vStore/constantStore.js'
 
     export default {
         data() {
-            return data;
+            return {
+                imageSrc: 'resource/rabit.jpg',
+                formData: {
+                    file: '',
+                    id: User.getUser().id,
+                    content: '啦啦啦',
+                    className: '',
+                    location: '',
+                    school: '浙江工业大学'
+                }
+            };
+        },
+        computed: {
+            className() {
+                return constantStore.state.className;
+            },
+            location() {
+                return constantStore.state.location;
+            }
+        },
+        mounted() {
+            let self = this;
+            //获取头像
+            Person.getContent(data.formData.id).then((res) => {
+                self.imageSrc = res.avatarUrl;
+            }, (msg) => {
+                // alert(msg);
+            });
         },
         methods: {
             submitForm() {
+                let data = this;
                 User.editInformation(data.formData).then(() => {
                     // 编辑成功
                     Util.changeView("/");
@@ -134,13 +98,14 @@
                 return;
             },
             preImg(sourceId) {
+                let data = this;
                 if (typeof FileReader === 'undefined') {
                     alert('浏览器等级低于IE9，无法进行头像处理');
                     return;
                 }
                 var reader = new FileReader();
 
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     //set Image Src here
                     data.imageSrc = this.result;
                 }
@@ -149,4 +114,5 @@
             }
         }
     }
+
 </script>

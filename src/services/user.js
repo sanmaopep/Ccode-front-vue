@@ -200,7 +200,7 @@ class User {
             }
             xhr.open("POST", url);
             xhr.send(myForm);
-            console.log(myForm);
+            // console.log(myForm);
         });
     }
 }

@@ -1,10 +1,10 @@
 <template>
-	<div>
-    	<myheader page="2"></myheader>
-    	<mycontent :mID="$route.params.id"></mycontent>
-    	<myjoin :mID="$route.params.id"></myjoin>
-    	<mycomment :mID="$route.params.id"></mycomment>
-  	</div>
+    <div>
+        <myheader page="2"></myheader>
+        <mycontent :mID="$route.params.id"></mycontent>
+        <myjoin :mID="$route.params.id"></myjoin>
+        <mycomment :mID="$route.params.id"></mycomment>
+    </div>
 </template>
 
 <script>
@@ -19,6 +19,9 @@
         data() {
             return data;
         },
+        mounted() {
+            window.scrollTo(0, 0);
+        },
         components: {
             myheader,
             mycontent,
@@ -26,4 +29,5 @@
             mycomment
         }
     }
+
 </script>

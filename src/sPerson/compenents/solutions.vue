@@ -1,11 +1,11 @@
 <template>
-	<section class="ui container animation" style="margin-top: 20px;">
-		<div class="ui segment">
-			<h2 class="ui header tac normal-fw">TA的方案</h2>
-			<solution v-for="(item,index) in list" :data="list[index]"></solution>
-		</div>
-		<scollTop></scollTop>
-	</section>
+    <section class="ui container animation" style="margin-top: 20px;">
+        <div class="ui segment">
+            <h2 class="ui header tac normal-fw">TA的方案</h2>
+            <solution v-for="(item,index) in list" :data="list[index]"></solution>
+        </div>
+        <scollTop></scollTop>
+    </section>
 </template>
 
 <script>
@@ -37,7 +37,7 @@
         data() {
             return data;
         },
-        created() {
+        mounted() {
             let self = this;
             getList(self.mID);
         },
@@ -49,4 +49,5 @@
             scollTop
         }
     }
+
 </script>

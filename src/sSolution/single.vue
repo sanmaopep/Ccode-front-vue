@@ -1,12 +1,12 @@
 <template>
-	<div>
-		<myheader page="3"></myheader>
-		<mycontent :mID="$route.params.id" @getuser="knowUser"></mycontent>
+    <div>
+        <myheader page="3"></myheader>
+        <mycontent :mID="$route.params.id" @getuser="knowUser"></mycontent>
         <git :mID="$route.params.id" :isCurrUser="isCurrUser"></git>
         <codelines :mID="$route.params.id" :report="queryResult"></codelines>
         <similarity :mID="$route.params.id" :report="queryResult"></similarity>
-		<mycomment :mID="$route.params.id"></mycomment>
-	</div>
+        <mycomment :mID="$route.params.id"></mycomment>
+    </div>
 </template>
 <script>
     import myheader from '../compenents/header.vue'
@@ -45,6 +45,7 @@
         mounted() {
             let id = this.$route.params.id;
             let self = this;
+            window.scrollTo(0, 0);
             assessment.getCodeQueryResult(id).then((res) => {
                 // 成功
                 self.queryResult = res;
@@ -53,4 +54,5 @@
             })
         }
     }
+
 </script>

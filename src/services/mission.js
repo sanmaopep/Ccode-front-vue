@@ -35,7 +35,7 @@ class Mission {
             data["token"] = token;
             // console.log(data);
             $.post(url, data,
-                function(data, textStatus, jqXHR) {
+                function (data, textStatus, jqXHR) {
                     // console.log(data);
                     if (data.code === "T") {
                         alert(data.msg);
@@ -94,8 +94,8 @@ class Mission {
             data['pageNum'] = pageNum;
             data['pageSize'] = pageSize;
             $.post(url, data,
-                function(data, textStatus, jqXHR) {
-                    console.log(data);
+                function (data, textStatus, jqXHR) {
+                    // console.log(data);
                     if (data.code === "T") {
                         resolve(data.missionList);
                     } else {
@@ -142,8 +142,8 @@ class Mission {
             let url = config.url + "appmission/getonemission";
             let data = { 'id': id };
             $.post(url, data,
-                function(data, textStatus, jqXHR) {
-                    console.log(data);
+                function (data, textStatus, jqXHR) {
+                    // console.log(data);
                     if (data.code === "T") {
                         resolve(data.data);
                     } else {
@@ -191,8 +191,8 @@ class Mission {
             let url = config.url + 'appsolution/getMissionPerson';
             let data = { 'id': id };
             $.post(url, data,
-                function(data, textStatus, jqXHR) {
-                    console.log(data);
+                function (data, textStatus, jqXHR) {
+                    // console.log(data);
                     if (data.code === "T") {
                         for (let i = 0; i < data.data.length; i++) {
                             data.data[i]['avatarUrl'] = Util.changeAvatarUrl(data.data[i]['avatarUrl']);
@@ -239,8 +239,8 @@ class Mission {
             let data = { 'id': id };
 
             $.post(url, data,
-                function(data, textStatus, jqXHR) {
-                    console.log(data);
+                function (data, textStatus, jqXHR) {
+                    // console.log(data);
                     if (data.code === "T") {
                         for (let i = 0; i < data.data.length; i++) {
                             data.data[i]['avatarUrl'] = Util.changeAvatarUrl(data.data[i]['avatarUrl']);
@@ -288,8 +288,8 @@ class Mission {
             let data = { 'id': id, 'content': content, 'token': token };
             console.log(data);
             $.post(url, data,
-                function(data, textStatus, jqXHR) {
-                    console.log(data);
+                function (data, textStatus, jqXHR) {
+                    // console.log(data);
                     if (data.code === "T") {
                         resolve();
                     } else {
@@ -311,10 +311,10 @@ class Mission {
             let url = config.url + 'appmission/delMission';
             let token = User.getUser().token;
             let data = { 'id': id, 'token': token };
-            console.log(data);
+            // console.log(data);
             $.post(url, data,
-                function(data, textStatus, jqXHR) {
-                    console.log(data);
+                function (data, textStatus, jqXHR) {
+                    // console.log(data);
                     if (data.code === "T") {
                         resolve();
                         alert("删除成功");

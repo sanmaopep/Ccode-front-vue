@@ -51,7 +51,7 @@ class Person {
             data['pageSize'] = pageSize;
             // console.log(data);
             $.post(url, data,
-                function(data, textStatus, jqXHR) {
+                function (data, textStatus, jqXHR) {
                     // console.log(data);
                     if (data.code === "T") {
                         resolve(data.data);
@@ -98,7 +98,7 @@ class Person {
             let token = User.getUser().token;
             let data = { 'id': id, 'token': token };
             $.post(url, data,
-                function(data, textStatus, jqXHR) {
+                function (data, textStatus, jqXHR) {
                     if (data.code === "T") {
                         data.data['avatarUrl'] = Util.changeAvatarUrl(data.data['avatarUrl']);
                         resolve(data.data);
@@ -144,10 +144,10 @@ class Person {
             const url = config.url + 'apptalents/getTaComments';
             let token = User.getUser().token;
             let data = { 'id': id, 'token': token };
-            console.log(data);
+            // console.log(data);
             $.post(url, data,
-                function(data, textStatus, jqXHR) {
-                    console.log(data);
+                function (data, textStatus, jqXHR) {
+                    // console.log(data);
                     if (data.code === "T") {
                         for (let i = 0; i < data.data.length; i++) {
                             data.data[i]['avatarUrl'] = Util.changeAvatarUrl(data.data[i]['avatarUrl']);
@@ -194,7 +194,7 @@ class Person {
             let data = { 'id': id, 'content': content, 'token': token };
             // console.log(data);
             $.post(url, data,
-                function(data, textStatus, jqXHR) {
+                function (data, textStatus, jqXHR) {
                     // console.log(data);
                     if (data.code === "T") {
                         resolve();
@@ -245,10 +245,10 @@ class Person {
             const url = config.url + 'apptalents/getPerSoList';
             let token = User.getUser().token;
             let data = { 'personid': id, 'token': token };
-            console.log(data);
+            // console.log(data);
             $.post(url, data,
-                function(data, textStatus, jqXHR) {
-                    console.log(data);
+                function (data, textStatus, jqXHR) {
+                    // console.log(data);
                     if (data.code === "T") {
                         for (let i = 0; i < data.data.length; i++) {
                             data.data[i]['avatarUrl'] = Util.changeAvatarUrl(data.data[i]['avatarUrl']);

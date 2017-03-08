@@ -3,42 +3,43 @@
         transition: all 1s;
         opacity: 1;
     }
-    
+
+
     .hideCard {
         opacity: 0;
     }
 </style>
 
 <template>
-	<section class="ui container animation" style="margin-top: 20px;">
-		<div class="ui segment">
-			<div class="tac">
-				<img class="ui centered medium circular image" :src="avatarUrl">
-			</div>
-			<h1 class="tac ui header">
-				{{ name }}
-			</h1>
-			<div id="personDetail" class="tac">
-				{{ content }}
-			</div>
-			<div class="ui divider"></div>
-			<div class="ui three statistics" style="margin-top: 20px;">
-				<div class="statistic">
-					<div class="label">擅长领域</div>
-					<div class="text value">{{ className }}</div>
-				</div>
-				<div class="statistic">
-					<div class="label">所在地区</div>
-					<div class="text value">{{ location }}</div>
-				</div>
-				<div class="statistic">
-					<div class="label">所在学校</div>
-					<div class="text value YaHei">{{ school }}</div>
-				</div>
-			</div>
-		</div>
-		<a href="user.html#/changeInfo" class="ui button fluid" v-if="mID == yourId">修改资料</a>
-	</section>
+    <section class="ui container animation" style="margin-top: 20px;">
+        <div class="ui segment">
+            <div class="tac">
+                <img class="ui centered medium circular image" :src="avatarUrl">
+            </div>
+            <h1 class="tac ui header">
+                {{ name }}
+            </h1>
+            <div id="personDetail" class="tac">
+                {{ content }}
+            </div>
+            <div class="ui divider"></div>
+            <div class="ui three statistics" style="margin-top: 20px;">
+                <div class="statistic">
+                    <div class="label">擅长领域</div>
+                    <div class="text value">{{ className }}</div>
+                </div>
+                <div class="statistic">
+                    <div class="label">所在地区</div>
+                    <div class="text value">{{ location }}</div>
+                </div>
+                <div class="statistic">
+                    <div class="label">所在学校</div>
+                    <div class="text value YaHei">{{ school }}</div>
+                </div>
+            </div>
+        </div>
+        <a href="user.html#/changeInfo" class="ui button fluid" v-if="mID == yourId">修改资料</a>
+    </section>
 </template>
 
 <script>
@@ -69,7 +70,7 @@
 
     export default {
         props: ['mID'],
-        created() {
+        mounted() {
             let self = this;
             setTimeout(() => {
                 self.hideCard = false;
@@ -80,4 +81,5 @@
             return data;
         }
     }
+
 </script>

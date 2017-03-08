@@ -1,5 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Vuex from 'vuex'
+
+Vue.use(VueRouter);
+Vue.use(Vuex);
+
 import List from './sMission/list.vue'
 import Submit from './sMission/submit.vue'
 import Single from './sMission/single.vue'
@@ -8,7 +13,6 @@ $.ajaxSetup({
     async: false
 });
 
-Vue.use(VueRouter);
 
 //创建router实例
 const router = new VueRouter({

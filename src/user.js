@@ -1,5 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Vuex from 'vuex'
+
+Vue.use(VueRouter);
+Vue.use(Vuex);
+
 import Register from './sUser/Register.vue'
 import Forget from './sUser/forgetPass.vue'
 import Login from './sUser/Login.vue'
@@ -11,7 +16,7 @@ $.ajaxSetup({
 });
 
 Vue.use(VueRouter);
-
+Vue.use(Vuex);
 //创建router实例
 const router = new VueRouter({
     routes: [

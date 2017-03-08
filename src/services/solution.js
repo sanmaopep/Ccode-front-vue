@@ -37,7 +37,7 @@ class Solution {
             data["token"] = token;
             // console.log(data);
             $.post(url, data,
-                function(data, textStatus, jqXHR) {
+                function (data, textStatus, jqXHR) {
                     if (data.code === "T") {
                         alert(data.msg);
                         Util.changeView('/');
@@ -91,10 +91,10 @@ class Solution {
             let url = config.url + "appsolution/solist";
             data['pageNum'] = pageNum;
             data['pageSize'] = pageSize;
-            console.log(data);
+            // console.log(data);
             $.post(url, data,
-                function(data, textStatus, jqXHR) {
-                    console.log(data);
+                function (data, textStatus, jqXHR) {
+                    // console.log(data);
                     if (data.code === "T") {
                         for (let i = 0; i < data.data.length; i++) {
                             data.data[i]['avatarUrl'] = Util.changeAvatarUrl(data.data[i]['avatarUrl']);
@@ -141,8 +141,8 @@ class Solution {
             let url = config.url + 'appsolution/getOneSolution';
             let data = { 'id': id };
             $.post(url, data,
-                function(data, textStatus, jqXHR) {
-                    console.log(data);
+                function (data, textStatus, jqXHR) {
+                    // console.log(data);
                     if (data.code === "T") {
                         resolve(data.data);
                     } else {
@@ -187,8 +187,8 @@ class Solution {
             let data = { 'id': id };
 
             $.post(url, data,
-                function(data, textStatus, jqXHR) {
-                    console.log(data);
+                function (data, textStatus, jqXHR) {
+                    // console.log(data);
                     if (data.code === "T") {
                         for (let i = 0; i < data.data.length; i++) {
                             data.data[i]['avatarUrl'] = Util.changeAvatarUrl(data.data[i]['avatarUrl']);
@@ -234,10 +234,10 @@ class Solution {
             let url = config.url + 'appsolution/addSoComment';
             let token = User.getUser().token;
             let data = { 'id': id, 'content': content, 'token': token };
-            console.log(data);
+            // console.log(data);
             $.post(url, data,
-                function(data, textStatus, jqXHR) {
-                    console.log(data);
+                function (data, textStatus, jqXHR) {
+                    // console.log(data);
                     if (data.code === "T") {
                         resolve();
                     } else {
